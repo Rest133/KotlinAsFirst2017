@@ -68,7 +68,7 @@ fun digitNumber(n: Int): Int {
         return 1
     var num=n
     var counter = 0
-    while (num>0){
+    while (num!=0){
         num/=10
         counter++
     }
@@ -205,13 +205,14 @@ fun revert(n: Int): Int {
         count++
     }
     num=n
-    while(count!=-1){
+    while(count!=0){
         k+=num%10
         num/=10
         k*=10
         count--
     }
-    return k/10
+    k+=num%10
+    return k
 }
 
 /**
@@ -230,13 +231,14 @@ fun isPalindrome(n: Int): Boolean{
         count++
     }
     num=n
-    while(count!=-1){
+    while(count!=0){
         k+=num%10
         num/=10
         k*=10
         count--
     }
-   return k/10==n
+    k+=num%10
+   return k==n
 }
 
 /**
