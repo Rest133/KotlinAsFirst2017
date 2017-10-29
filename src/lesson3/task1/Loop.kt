@@ -170,7 +170,9 @@ fun isCoPrime(m: Int, n: Int):Boolean {
  * то есть, существует ли такое целое k, что m <= k*k <= n.
  * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 квадрата не существует.
  */
-fun squareBetweenExists(m: Int, n: Int): Boolean { TODO() }
+fun squareBetweenExists(m: Int, n: Int): Boolean {
+    TODO()
+}
 
 /**
  * Средняя
@@ -247,7 +249,18 @@ fun isPalindrome(n: Int): Boolean{
  * Для заданного числа n определить, содержит ли оно различающиеся цифры.
  * Например, 54 и 323 состоят из разных цифр, а 111 и 0 из одинаковых.
  */
-fun hasDifferentDigits(n: Int): Boolean { TODO()}
+fun hasDifferentDigits(n: Int): Boolean {
+    var k=0
+    var m=0
+    var num=n
+    while (num/10!=0){
+        k=num%10
+        m=(num/10)%10
+        if (m!=k) break
+        num/=10
+    }
+     return m!=k
+}
 
 /**
  * Сложная
@@ -256,14 +269,69 @@ fun hasDifferentDigits(n: Int): Boolean { TODO()}
  * 149162536496481100121144...
  * Например, 2-я цифра равна 4, 7-я 5, 12-я 6.
  */
-fun squareSequenceDigit(n: Int): Int {TODO()
+fun squareSequenceDigit(n: Int): Int {
+        var num = 0//цифра
+        var sequence = 0//последовательность
+        var number = 0// число по порядку
+        var sq = 0//квадрат числа
+        var ten = 10//разряд
+        var counter = 1
+        while (sequence < n) {
+            number++
+            sq = number * number
+            while (sq / ten != 0) {
+                ten *= 10
+                counter++
+
+            }
+            sequence = sequence + counter
+        }
+        sequence = sequence - counter
+        ten /= 10
+        while (sequence != n) {
+            num = sq / ten % 10
+            ten /= 10
+            sequence++
+
+        }
+        return num
 }
 
-/**
+
+        /**
  * Сложная
  *
  * Найти n-ю цифру последовательности из чисел Фибоначчи (см. функцию fib выше):
  * 1123581321345589144...
  * Например, 2-я цифра равна 1, 9-я 2, 14-я 5.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int {
+            var fib=0
+            var fib1=1
+            var fib2=1
+            var seq=2//последовательность
+            var ten=10//разряд числа
+            var count=1//счетчик цифр
+            var num =0// сама цифра
+            if(n==1) return 1
+            if(n==2) return 1
+            while(seq<n){
+                fib=fib1+fib2
+                while(fib/ten!=0){
+                    ten*=10
+                    count++
+                }
+                seq=seq+count
+                fib1=fib2
+                fib2=fib
+            }
+
+            seq=seq-count
+            ten/=10
+            while (seq!=n){
+                num=fib/ten%10
+                ten/=10
+                seq++
+            }
+            return num
+        }
