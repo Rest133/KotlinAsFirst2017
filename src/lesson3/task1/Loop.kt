@@ -1,4 +1,5 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson3.task1
 
 import lesson1.task1.sqr
@@ -37,7 +38,7 @@ fun isPrime(n: Int): Boolean {
  */
 fun isPerfect(n: Int): Boolean {
     var sum = 1
-    for (m in 2..n/2) {
+    for (m in 2..n / 2) {
         if (n % m > 0) continue
         sum += m
         if (sum > n) break
@@ -64,12 +65,12 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  * Например, число 1 содержит 1 цифру, 456 -- 3 цифры, 65536 -- 5 цифр.
  */
 fun digitNumber(n: Int): Int {
-    if (n==0)
+    if (n == 0)
         return 1
-    var num=n
+    var num = n
     var counter = 0
-    while (num!=0){
-        num/=10
+    while (num != 0) {
+        num /= 10
         counter++
     }
     return counter
@@ -82,21 +83,21 @@ fun digitNumber(n: Int): Int {
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
 fun fib(n: Int): Int {
-  var m=2
-  var fib1=1
-  var fib2=1
-  var fib=0
-    if (n==1)
+    var m = 2
+    var fib1 = 1
+    var fib2 = 1
+    var fib = 0
+    if (n == 1)
         return 1
-    if (n==2)
+    if (n == 2)
         return 1
-  while (m<n) {
-  fib=fib1+fib2
-  fib1=fib2
-  fib2=fib
-  m++
-  }
-return fib
+    while (m < n) {
+        fib = fib1 + fib2
+        fib1 = fib2
+        fib2 = fib
+        m++
+    }
+    return fib
 
 }
 
@@ -108,14 +109,14 @@ return fib
  * минимальное число k, которое делится и на m и на n без остатка
  */
 fun lcm(m: Int, n: Int): Int {
-    var fnum=m
-    var snum=n
-    var nd=0
-    nd=m*n
-    while (fnum!=0&&snum!=0) {
-        if (fnum>snum) fnum%=snum else snum%=fnum
+    var fnum = m
+    var snum = n
+    var nd = 0
+    nd = m * n
+    while (fnum != 0 && snum != 0) {
+        if (fnum > snum) fnum %= snum else snum %= fnum
     }
-    return nd/(fnum+snum)
+    return nd / (fnum + snum)
 }
 
 /**
@@ -124,9 +125,9 @@ fun lcm(m: Int, n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-             var num=n
-             var q=2
-    while (q<=num && num%q!=0) {
+    var num = n
+    var q = 2
+    while (q <= num && num % q != 0) {
         q++
     }
     return q
@@ -138,9 +139,9 @@ fun minDivisor(n: Int): Int {
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
 fun maxDivisor(n: Int): Int {
-    var num=n
-    var q1=n-1
-    while(num%q1!=0){
+    var num = n
+    var q1 = n - 1
+    while (num % q1 != 0) {
         q1--
     }
     return q1
@@ -153,14 +154,14 @@ fun maxDivisor(n: Int): Int {
  * Взаимно простые числа не имеют общих делителей, кроме 1.
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
-fun isCoPrime(m: Int, n: Int):Boolean {
-    var snum=n
-    var fnum=m
-    var nd=m*n
-    while (fnum!=0&&snum!=0) {
-        if (fnum>snum) fnum%=snum else snum%=fnum
+fun isCoPrime(m: Int, n: Int): Boolean {
+    var snum = n
+    var fnum = m
+    var nd = m * n
+    while (fnum != 0 && snum != 0) {
+        if (fnum > snum) fnum %= snum else snum %= fnum
     }
-   return nd == nd/(fnum+snum)
+    return nd == nd / (fnum + snum)
 }
 
 /**
@@ -199,21 +200,21 @@ fun cos(x: Double, eps: Double): Double = TODO()
  * Не использовать строки при решении задачи.
  */
 fun revert(n: Int): Int {
-    var k=0
-    var count=0
-    var num=n
-    while (num/10!=0){
-        num/=10
+    var k = 0
+    var count = 0
+    var num = n
+    while (num / 10 != 0) {
+        num /= 10
         count++
     }
-    num=n
-    while(count!=0){
-        k+=num%10
-        num/=10
-        k*=10
+    num = n
+    while (count != 0) {
+        k += num % 10
+        num /= 10
+        k *= 10
         count--
     }
-    k+=num%10
+    k += num % 10
     return k
 }
 
@@ -224,23 +225,23 @@ fun revert(n: Int): Int {
  * первая цифра равна последней, вторая -- предпоследней и так далее.
  * 15751 -- палиндром, 3653 -- нет.
  */
-fun isPalindrome(n: Int): Boolean{
-    var k=0
-    var count=0
-    var num=n
-    while (num/10!=0){
-        num/=10
+fun isPalindrome(n: Int): Boolean {
+    var k = 0
+    var count = 0
+    var num = n
+    while (num / 10 != 0) {
+        num /= 10
         count++
     }
-    num=n
-    while(count!=0){
-        k+=num%10
-        num/=10
-        k*=10
+    num = n
+    while (count != 0) {
+        k += num % 10
+        num /= 10
+        k *= 10
         count--
     }
-    k+=num%10
-   return k==n
+    k += num % 10
+    return k == n
 }
 
 /**
@@ -250,16 +251,16 @@ fun isPalindrome(n: Int): Boolean{
  * Например, 54 и 323 состоят из разных цифр, а 111 и 0 из одинаковых.
  */
 fun hasDifferentDigits(n: Int): Boolean {
-    var k=0
-    var m=0
-    var num=n
-    while (num/10!=0){
-        k=num%10
-        m=(num/10)%10
-        if (m!=k) break
-        num/=10
+    var k = 0
+    var m = 0
+    var num = n
+    while (num / 10 != 0) {
+        k = num % 10
+        m = (num / 10) % 10
+        if (m != k) break
+        num /= 10
     }
-     return m!=k
+    return m != k
 }
 
 /**
@@ -270,35 +271,35 @@ fun hasDifferentDigits(n: Int): Boolean {
  * Например, 2-я цифра равна 4, 7-я 5, 12-я 6.
  */
 fun squareSequenceDigit(n: Int): Int {
-        var num = 0//цифра
-        var sequence = 0//последовательность
-        var number = 0// число по порядку
-        var sq = 0//квадрат числа
-        var ten = 10//разряд
-        var counter = 1
-        while (sequence < n) {
-            number++
-            sq = number * number
-            while (sq / ten != 0) {
-                ten *= 10
-                counter++
+    var num = 0//цифра
+    var sequence = 0//последовательность
+    var number = 0// число по порядку
+    var sq = 0//квадрат числа
+    var ten = 10//разряд
+    var counter = 1
+    while (sequence < n) {
+        number++
+        sq = number * number
+        while (sq / ten != 0) {
+            ten *= 10
+            counter++
 
-            }
-            sequence = sequence + counter
         }
-        sequence = sequence - counter
+        sequence = sequence + counter
+    }
+    sequence = sequence - counter
+    ten /= 10
+    while (sequence != n) {
+        num = sq / ten % 10
         ten /= 10
-        while (sequence != n) {
-            num = sq / ten % 10
-            ten /= 10
-            sequence++
+        sequence++
 
-        }
-        return num
+    }
+    return num
 }
 
 
-        /**
+/**
  * Сложная
  *
  * Найти n-ю цифру последовательности из чисел Фибоначчи (см. функцию fib выше):
@@ -306,32 +307,32 @@ fun squareSequenceDigit(n: Int): Int {
  * Например, 2-я цифра равна 1, 9-я 2, 14-я 5.
  */
 fun fibSequenceDigit(n: Int): Int {
-            var fib=0
-            var fib1=1
-            var fib2=1
-            var seq=2//последовательность
-            var ten=10//разряд числа
-            var count=1//счетчик цифр
-            var num =0// сама цифра
-            if(n==1) return 1
-            if(n==2) return 1
-            while(seq<n){
-                fib=fib1+fib2
-                while(fib/ten!=0){
-                    ten*=10
-                    count++
-                }
-                seq=seq+count
-                fib1=fib2
-                fib2=fib
-            }
-
-            seq=seq-count
-            ten/=10
-            while (seq!=n){
-                num=fib/ten%10
-                ten/=10
-                seq++
-            }
-            return num
+    var fib = 0
+    var fib1 = 1
+    var fib2 = 1
+    var seq = 2//последовательность
+    var ten = 10//разряд числа
+    var count = 1//счетчик цифр
+    var num = 0// сама цифра
+    if (n == 1) return 1
+    if (n == 2) return 1
+    while (seq < n) {
+        fib = fib1 + fib2
+        while (fib / ten != 0) {
+            ten *= 10
+            count++
         }
+        seq = seq + count
+        fib1 = fib2
+        fib2 = fib
+    }
+
+    seq = seq - count
+    ten /= 10
+    while (seq != n) {
+        num = fib / ten % 10
+        ten /= 10
+        seq++
+    }
+    return num
+}
