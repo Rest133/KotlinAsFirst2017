@@ -1,4 +1,5 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson2.task1
 
 import lesson1.task1.discriminant
@@ -34,7 +35,11 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * Мой возраст. Для заданного 0 < n < 200, рассматриваемого как возраст человека,
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
-fun ageDescription(age: Int): String =if ((age %10)%10==1&& age !=111 && age!=11)"${age} год" else if ((age %10) in 2..4 && (age !in 5..20) &&(age !in 112..114))"${age} года" else "${age} лет"
+fun ageDescription(age: Int): String = when {
+    (age % 10) % 10 == 1 && age != 111 && age != 11 -> "${age} год"
+    (age % 10) in 2..4 && (age !in 5..20) && (age !in 112..114) -> "${age} года"
+    else -> "${age} лет"
+}
 
 /**
  * Простая
@@ -45,7 +50,16 @@ fun ageDescription(age: Int): String =if ((age %10)%10==1&& age !=111 && age!=11
  */
 fun timeForHalfWay(t1: Double, v1: Double,
                    t2: Double, v2: Double,
-                   t3: Double, v3: Double): Double =if(v1*t1>=(v1*t1+v2*t2+v3*t3)/2) (v1*t1+v2*t2+v3*t3)/2/v1 else if(v1*t1+v2*t2>=(v1*t1+v2*t2+v3*t3)/2&&v1*t1<(v1*t1+v2*t2+v3*t3)/2) t1+((v1*t1+v2*t2+v3*t3)/2-v1*t1)/v2 else t1+t2+((v1*t1+v2*t2+v3*t3)/2-v1*t1-v2*t2)/v3
+                   t3: Double, v3: Double): Double {
+    var half = (v1 * t1 + v2 * t2 + v3 * t3) / 2
+    var s1 = v1 * t1
+    var s2 = v2 * t2
+    return when {
+        s1 >= half -> half / v1
+        s1 + s2 >= half && s1 < half -> t1 + (half - s1) / v2
+        else -> t1 + t2 + (half - s1 - s2) / v3
+    }
+}
 
 /**
  * Простая
@@ -58,7 +72,13 @@ fun timeForHalfWay(t1: Double, v1: Double,
  */
 fun whichRookThreatens(kingX: Int, kingY: Int,
                        rookX1: Int, rookY1: Int,
-                       rookX2: Int, rookY2: Int): Int = if ((kingX==rookX2||kingY==rookY2)&&(kingX==rookX1||kingY==rookY1)) 3 else if (kingX==rookX2||kingY==rookY2) 2 else if (kingX==rookX1||kingY==rookY1) 1 else 0
+                       rookX2: Int, rookY2: Int): Int = when {
+    (kingX == rookX2 || kingY == rookY2) && (kingX == rookX1 || kingY == rookY1) -> 3
+    kingX == rookX2 || kingY == rookY2 -> 2
+    kingX == rookX1 || kingY == rookY1 -> 1
+    else -> 0
+}
+
 /**
  * Простая
  *
@@ -71,7 +91,12 @@ fun whichRookThreatens(kingX: Int, kingY: Int,
  */
 fun rookOrBishopThreatens(kingX: Int, kingY: Int,
                           rookX: Int, rookY: Int,
-                          bishopX: Int, bishopY: Int): Int = if((kingX==rookX||kingY==rookY) && (abs(kingX-bishopX)== abs(kingY-bishopY))) 3 else if(abs(kingX-bishopX)== abs(kingY-bishopY)) 2 else if (kingX==rookX||kingY==rookY) 1 else 0
+                          bishopX: Int, bishopY: Int): Int = when {
+    (kingX == rookX || kingY == rookY) && (abs(kingX - bishopX) == abs(kingY - bishopY)) -> 3
+    abs(kingX - bishopX) == abs(kingY - bishopY) -> 2
+    kingX == rookX || kingY == rookY -> 1
+    else -> 0
+}
 
 /**
  * Простая
@@ -81,10 +106,10 @@ fun rookOrBishopThreatens(kingX: Int, kingY: Int,
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double): Int{
-    if(a+b<=c||b+c<=a||a+c<=b) return -1
-    if(a*a+b*b<c*c||a*a+c*c<b*b||c*c+b*b<a*a) return 2
-    if(a*a+b*b==c*c||a*a+c*c==b*b||c*c+b*b==a*a) return 1 else return 0
+fun triangleKind(a: Double, b: Double, c: Double): Int {
+    if (a + b <= c || b + c <= a || a + c <= b) return -1
+    if (a * a + b * b < c * c || a * a + c * c < b * b || c * c + b * b < a * a) return 2
+    if (a * a + b * b == c * c || a * a + c * c == b * b || c * c + b * b == a * a) return 1 else return 0
 }
 
 /**
@@ -95,4 +120,11 @@ fun triangleKind(a: Double, b: Double, c: Double): Int{
  * Найти длину пересечения отрезков AB и CD.
  * Если пересечения нет, вернуть -1.
  */
-fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = if ((b<d&&b<c)||(d<a&&d<b)) -1 else if ((b<=d)&&(b>c)&&(a<=c)) b-c else if ((b>d)&&(c>=a)) d-c else if ((b>=d)&&(a>c)) d-a else if((d>b)&&(a>c)) b-a else 0
+fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = when {
+    b < d && b < c || d < a && d < b -> -1
+    (b <= d) && (b > c) && (a <= c) -> b - c
+    (b > d) && (c >= a) -> d - c
+    (b >= d) && (a > c) -> d - a
+    (d > b) && (a > c) -> b - a
+    else -> 0
+}
