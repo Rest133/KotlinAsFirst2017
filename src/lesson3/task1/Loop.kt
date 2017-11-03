@@ -280,9 +280,6 @@ fun squareSequenceDigit(n: Int): Int {
         num++
         sq = num * num
         sequence += sq
-        println("seq=${sequence}")
-        println("i=${sequence.length}")
-        println("last=${sequence.last()}")
     }
     number = sequence.last().toString()
     sequence[i]
