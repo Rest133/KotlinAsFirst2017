@@ -272,31 +272,25 @@ fun hasDifferentDigits(n: Int): Boolean {
  */
 fun squareSequenceDigit(n: Int): Int {
     var num = 0//цифра
-    var sequence = 0//последовательность
-    var number = 0// число по порядку
+    var sequence: String = ""//последовательность
+    var number: String // число по порядку
     var sq = 0//квадрат числа
-    var ten = 10//разряд
-    var counter = 1
-    while (sequence < n) {
-        number++
-        sq = number * number
-        while (sq / ten != 0) {
-            ten *= 10
-            counter++
-
-        }
-        sequence = sequence + counter
+    var i = 0
+    while (sequence.length < n) {
+        num++
+        sq = num * num
+        sequence += sq
+        println("seq=${sequence}")
+        println("i=${sequence.length}")
+        println("last=${sequence.last()}")
     }
-    sequence = sequence - counter
-    ten /= 10
-    while (sequence != n) {
-        num = sq / ten % 10
-        ten /= 10
-        sequence++
-
+    number = sequence.last().toString()
+    sequence[i]
+    if (sequence.length == n) return number.toInt() else while (i != n) {
+        i--
     }
-    return num
-}
+    number = sequence[i - 1].toString()
+    return number.toInt()
 
 
 /**
