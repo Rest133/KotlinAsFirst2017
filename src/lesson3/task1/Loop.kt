@@ -280,9 +280,6 @@ fun squareSequenceDigit(n: Int): Int {
         num++
         sq = num * num
         sequence += sq
-        println("seq=${sequence}")
-        println("i=${sequence.length}")
-        println("last=${sequence.last()}")
     }
     number = sequence.last().toString()
     sequence[i]
@@ -315,9 +312,6 @@ fun fibSequenceDigit(n: Int): Int {
         string += fib
         fib1 = fib2
         fib2 = fib
-        println("seq=${string}")
-        println("i=${string.length}")
-        println("last=${string.last()}")
     }
     number = string.last().toString()
     string[i]
