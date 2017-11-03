@@ -39,7 +39,7 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = x1 == x2 || y1
  */
 fun circleInside(x1: Double, y1: Double, r1: Double,
                  x2: Double, y2: Double, r2: Double): Boolean {
-    var s: Double = pow((sqr(x2 - x1) + sqr(y2 - y1)), 0.5)
+    val s: Double = sqrt(sqr(x2 - x1) + sqr(y2 - y1))
     return (s == r2 - r1) || (s < r2 - r1)
 }
 /**
