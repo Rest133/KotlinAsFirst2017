@@ -42,7 +42,6 @@ fun circleInside(x1: Double, y1: Double, r1: Double,
     var s = sqrt(sqr(x2 - x1) + sqr(y2 - y1))
     return (s == r2 - r1) || (s < r2 - r1)
 }
-
 /**
  * Средняя
  *
