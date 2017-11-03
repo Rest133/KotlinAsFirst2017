@@ -290,7 +290,6 @@ fun squareSequenceDigit(n: Int): Int {
     return number.toInt()
 }
 
-
 /**
  * Сложная
  *
@@ -298,7 +297,6 @@ fun squareSequenceDigit(n: Int): Int {
  * 1123581321345589144...
  * Например, 2-я цифра равна 1, 9-я 2, 14-я 5.
  */
-
 fun fibSequenceDigit(n: Int): Int {
     var fib = 0
     var fib1 = 1
