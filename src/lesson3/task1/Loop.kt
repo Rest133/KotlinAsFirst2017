@@ -306,33 +306,27 @@ fun squareSequenceDigit(n: Int): Int {
  * 1123581321345589144...
  * Например, 2-я цифра равна 1, 9-я 2, 14-я 5.
  */
-fun fibSequenceDigit(n: Int): Int {
-    var fib = 0
-    var fib1 = 1
-    var fib2 = 1
-    var seq = 2//последовательность
-    var ten = 10//разряд числа
-    var count = 1//счетчик цифр
-    var num = 0// сама цифра
-    if (n == 1) return 1
-    if (n == 2) return 1
-    while (seq < n) {
-        fib = fib1 + fib2
-        while (fib / ten != 0) {
-            ten *= 10
-            count++
-        }
-        seq = seq + count
-        fib1 = fib2
-        fib2 = fib
-    }
 
-    seq = seq - count
-    ten /= 10
-    while (seq != n) {
-        num = fib / ten % 10
-        ten /= 10
-        seq++
+    fun fibSequenceDigit(n: Int): Int {
+        var fib = 0
+        var fib1 = 1
+        var fib2 = 1
+        var i = 0
+        var l: String
+        var number: String
+        var string: String = "11"
+        if (n <= 2) return 1
+        while (string.length < n) {
+            fib = fib1 + fib2
+            string += fib
+            fib1 = fib2
+            fib2 = fib
+        }
+        number = string.last().toString()
+        string[i]
+        if (string.length == n) return number.toInt() else while (i != n) {
+            i--
+        }
+        l = string[i - 1].toString()
+        return l.toInt()
     }
-    return num
-}
