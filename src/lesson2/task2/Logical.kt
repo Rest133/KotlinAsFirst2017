@@ -2,8 +2,9 @@
 
 package lesson2.task2
 
+import lesson1.task1.sqRoot
 import lesson1.task1.sqr
-import java.lang.Math.abs
+import java.lang.Math.*
 
 /**
  * Пример
