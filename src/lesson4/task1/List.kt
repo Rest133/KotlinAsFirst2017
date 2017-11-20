@@ -279,7 +279,53 @@ fun decimalFromString(str: String, base: Int): Int {
  * 90 = XC, 100 = C, 400 = CD, 500 = D, 900 = CM, 1000 = M.
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
-fun roman(n: Int): String = TODO()
+fun roman(n: Int): String {
+    var number = ""
+    var N = n
+    N /= 1000
+    while (N != 0) {
+        number += 'M'
+        N--
+    }
+    N = n % 1000
+    when {
+        N / 100 == 9 -> number += "CM"
+        N / 100 == 8 -> number += "DCCC"
+        N / 100 == 7 -> number += "DCC"
+        N / 100 == 6 -> number += "DC"
+        N / 100 == 5 -> number += "D"
+        N / 100 == 4 -> number += "CD"
+        N / 100 == 3 -> number += "CCC"
+        N / 100 == 2 -> number += "CC"
+        N / 100 == 1 -> number += "C"
+    }
+    N = n % 100
+    when {
+        N / 10 == 9 -> number += "XC"
+        N / 10 == 8 -> number += "LXXX"
+        N / 10 == 7 -> number += "LXX"
+        N / 10 == 6 -> number += "LX"
+        N / 10 == 5 -> number += "L"
+        N / 10 == 4 -> number += "XL"
+        N / 10 == 3 -> number += "XXX"
+        N / 10 == 2 -> number += "XX"
+        N / 10 == 1 -> number += "X"
+    }
+    N = n % 10
+    when {
+        N == 9 -> number += "IX"
+        N == 8 -> number += "VIII"
+        N == 7 -> number += "VII"
+        N == 6 -> number += "VI"
+        N == 5 -> number += "V"
+        N == 4 -> number += "IV"
+        N == 3 -> number += "III"
+        N == 2 -> number += "II"
+        N == 1 -> number += "I"
+    }
+
+    return number
+}
 
 /**
  * Очень сложная
@@ -297,10 +343,8 @@ fun russian(n: Int): String {
     val hundred = listOf(" ", " сто ", " двести ", " триста ", " четыреста ", " пятьсот ", " шестьсот ", " семьсот ", " восемьсот ", " девятьсот ")
     val thousands = listOf(" ", "одна", "две", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять")
     val thousand = listOf(" тысяча ", " тысячи ", " тысяч ")
-    val number = mutableListOf<Int>()
     var N = ""
     var k = n / 1000
-    var count = digitNumber(n)
     when {
         k % 100 in 10 until 20 -> N += hundred[n / 100000] + eleven[k % 10] + thousand[2]
         else -> if (k % 10 == 1) N += hundred[n / 100000] + tens[k % 100 / 10] + thousands[k % 10] + thousand[0]
@@ -309,16 +353,14 @@ fun russian(n: Int): String {
             N += hundred[n / 100000] + tens[k % 100 / 10] + thousands[k % 10] + thousand[2]
     }
     N = N.trim()
-    println("N1=${N}")
     when {N == "тысяч" || N == "тысяч" || N == "тысяч" -> N = ""
     }
-    println("N2=${N}")
     k = n % 1000
     when {
         k % 100 in 10 until 20 -> N += hundred[n % 1000 / 100] + eleven[k % 10]
         else -> N += hundred[n % 1000 / 100] + tens[k % 100 / 10] + numbers[k % 10]
     }
-    N = N.trim().replace("  "," ")
-    N= N.replace("  "," ")
-            return N
+    N = N.trim().replace("  ", " ")
+    N = N.replace("  ", " ")
+    return N
 }
