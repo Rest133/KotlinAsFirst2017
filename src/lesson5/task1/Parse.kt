@@ -1,5 +1,10 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson5.task1
+
+import com.sun.xml.internal.ws.api.model.ExceptionType
+import java.io.File.separator
+import java.sql.Time
 
 /**
  * Пример
@@ -48,12 +53,10 @@ fun main(args: Array<String>) {
         val seconds = timeStrToSeconds(line)
         if (seconds == -1) {
             println("Введённая строка $line не соответствует формату ЧЧ:ММ:СС")
-        }
-        else {
+        } else {
             println("Прошло секунд с начала суток: $seconds")
         }
-    }
-    else {
+    } else {
         println("Достигнут <конец файла> в процессе чтения строки. Программа прервана")
     }
 }
@@ -66,7 +69,19 @@ fun main(args: Array<String>) {
  * День и месяц всегда представлять двумя цифрами, например: 03.04.2011.
  * При неверном формате входной строки вернуть пустую строку
  */
-fun dateStrToDigit(str: String): String = TODO()
+fun dateStrToDigit(str: String): String {
+    val month = mutableListOf("", "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября",
+            "ноября", "декабря")
+    val Str = str.split(" ").toMutableList()
+    for (part in Str) {
+        if (Str.count() != 3 || Str[1] !in month) return ""
+    }
+    val Time = month.indexOf(Str[1])
+    Str[0] = twoDigitStr(Str[0].toInt())
+    Str[1] = twoDigitStr(Time)
+
+    return Str.joinToString(separator = ".")
+}
 
 /**
  * Средняя
@@ -75,7 +90,25 @@ fun dateStrToDigit(str: String): String = TODO()
  * Перевести её в строковый формат вида "15 июля 2016".
  * При неверном формате входной строки вернуть пустую строку
  */
-fun dateDigitToStr(digital: String): String = TODO()
+fun dateDigitToStr(digital: String): String {
+    var Time = ""
+    val month = mutableListOf("", "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября",
+            "ноября", "декабря")
+    val Str = digital.split(".").toMutableList()
+    var m = 0
+    try {
+        m = Str[1].toInt()
+        if (m !in 1..12) return ""
+    } catch (ex: NumberFormatException) {
+        return ""
+    }
+    if (Str.count() != 3) return ""
+    Str[1] = month[Str[1].toInt()]
+    if (Str[0].toInt() in 0..9) Time = Str[0].last() + " " + Str[1] + " " + Str[2]
+    else Time = Str[0] + " " + Str[1] + " " + Str[2]
+    return Time
+
+}
 
 /**
  * Средняя
@@ -135,7 +168,9 @@ fun plusMinus(expression: String): Int = TODO()
  * Вернуть индекс начала первого повторяющегося слова, или -1, если повторов нет.
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
-fun firstDuplicateIndex(str: String): Int = TODO()
+fun firstDuplicateIndex(str: String): Int {
+    TODO()
+}
 
 /**
  * Сложная
