@@ -4,6 +4,7 @@ package lesson4.task1
 
 import lesson1.task1.discriminant
 import lesson1.task1.sqr
+import lesson3.task1.digitNumber
 import lesson3.task1.isPrime
 import lesson3.task1.minDivisor
 import java.lang.Math.pow
@@ -267,7 +268,7 @@ fun decimal(digits: List<Int>, base: Int): Int {
  * Например: str = "13c", base = 14 -> 250
  */
 fun decimalFromString(str: String, base: Int): Int {
-TODO()
+    TODO()
 }
 
 /**
@@ -287,4 +288,37 @@ fun roman(n: Int): String = TODO()
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun russian(n: Int): String = TODO()
+fun russian(n: Int): String {
+    val numbers = listOf(" ", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять")
+    val tens = listOf(" ", "десять ", "двадцать ", "тридцать ", "сорок ",
+            "пятьдесят ", "шестьдесят ", "семьдесят ", "восемьдесят ", "девяносто ")
+    val eleven = listOf("десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать",
+            "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать")
+    val hundred = listOf(" ", " сто ", " двести ", " триста ", " четыреста ", " пятьсот ", " шестьсот ", " семьсот ", " восемьсот ", " девятьсот ")
+    val thousands = listOf(" ", "одна", "две", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять")
+    val thousand = listOf(" тысяча ", " тысячи ", " тысяч ")
+    val number = mutableListOf<Int>()
+    var N = ""
+    var k = n / 1000
+    var count = digitNumber(n)
+    when {
+        k % 100 in 10 until 20 -> N += hundred[n / 100000] + eleven[k % 10] + thousand[2]
+        else -> if (k % 10 == 1) N += hundred[n / 100000] + tens[k % 100 / 10] + thousands[k % 10] + thousand[0]
+        else if (k % 10 == 2 || k % 10 == 3 || k % 10 == 4) N += hundred[n / 100000] + tens[k % 100 / 10] + thousands[k % 10] + thousand[1]
+        else
+            N += hundred[n / 100000] + tens[k % 100 / 10] + thousands[k % 10] + thousand[2]
+    }
+    N = N.trim()
+    println("N1=${N}")
+    when {N == "тысяч" || N == "тысяч" || N == "тысяч" -> N = ""
+    }
+    println("N2=${N}")
+    k = n % 1000
+    when {
+        k % 100 in 10 until 20 -> N += hundred[n % 1000 / 100] + eleven[k % 10]
+        else -> N += hundred[n % 1000 / 100] + tens[k % 100 / 10] + numbers[k % 10]
+    }
+    N = N.trim().replace("  "," ")
+    N= N.replace("  "," ")
+            return N
+}
