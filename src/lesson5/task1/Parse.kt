@@ -70,8 +70,8 @@ fun main(args: Array<String>) {
  * При неверном формате входной строки вернуть пустую строку
  */
 fun dateStrToDigit(str: String): String {
-    val month = mutableListOf("", "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября",
-            "ноября", "декабря")
+    val month = mutableListOf("", "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября",
+            "октября", "ноября", "декабря")
     val Str = str.split(" ").toMutableList()
     for (part in Str) {
         if (Str.count() != 3 || Str[1] !in month) return ""
@@ -92,13 +92,12 @@ fun dateStrToDigit(str: String): String {
  */
 fun dateDigitToStr(digital: String): String {
     var Time = ""
-    val month = mutableListOf("", "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября",
-            "ноября", "декабря")
+    val month = mutableListOf("", "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", 
+            "октября", "ноября", "декабря")
     val Str = digital.split(".").toMutableList()
-    var m = 0
     try {
-        m = Str[1].toInt()
-        if (m !in 1..12) return ""
+       var m = Str[1].toInt()-1
+        if (m !in 0..11) return ""
     } catch (ex: NumberFormatException) {
         return ""
     }
