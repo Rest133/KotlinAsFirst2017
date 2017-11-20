@@ -3,7 +3,7 @@
 package lesson3.task1
 
 import lesson1.task1.sqr
-import java.lang.Math.sqrt
+import java.lang.Math.*
 
 /**
  * Пример
@@ -111,8 +111,7 @@ fun fib(n: Int): Int {
 fun lcm(m: Int, n: Int): Int {
     var fnum = m
     var snum = n
-    var nd = 0
-    nd = m * n
+    var nd = m * n
     while (fnum != 0 && snum != 0) {
         if (fnum > snum) fnum %= snum else snum %= fnum
     }
@@ -155,13 +154,8 @@ fun maxDivisor(n: Int): Int {
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
 fun isCoPrime(m: Int, n: Int): Boolean {
-    var snum = n
-    var fnum = m
-    var nd = m * n
-    while (fnum != 0 && snum != 0) {
-        if (fnum > snum) fnum %= snum else snum %= fnum
-    }
-    return nd == nd / (fnum + snum)
+    var nd=lcm(m,n)
+    return m*n==nd
 }
 
 /**
@@ -172,7 +166,9 @@ fun isCoPrime(m: Int, n: Int): Boolean {
  * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 квадрата не существует.
  */
 fun squareBetweenExists(m: Int, n: Int): Boolean {
-    TODO()
+    for (k in m..n)
+        if (sqrt(k.toDouble()) % 1.0 == 0.0) return true
+    return false
 }
 
 /**
@@ -182,7 +178,9 @@ fun squareBetweenExists(m: Int, n: Int): Boolean {
  * sin(x) = x - x^3 / 3! + x^5 / 5! - x^7 / 7! + ...
  * Нужную точность считать достигнутой, если очередной член ряда меньше eps по модулю
  */
-fun sin(x: Double, eps: Double): Double = TODO()
+fun sin(x: Double, eps: Double): Double {
+TODO()
+}
 
 /**
  * Средняя
@@ -226,21 +224,7 @@ fun revert(n: Int): Int {
  * 15751 -- палиндром, 3653 -- нет.
  */
 fun isPalindrome(n: Int): Boolean {
-    var k = 0
-    var count = 0
-    var num = n
-    while (num / 10 != 0) {
-        num /= 10
-        count++
-    }
-    num = n
-    while (count != 0) {
-        k += num % 10
-        num /= 10
-        k *= 10
-        count--
-    }
-    k += num % 10
+    var k = revert(n)
     return k == n
 }
 
@@ -274,7 +258,7 @@ fun squareSequenceDigit(n: Int): Int {
     var num = 0//цифра
     var sequence: String = ""//последовательность
     var number: String // число по порядку
-    var sq = 0//квадрат числа
+    var sq: Int
     var i = 0
     while (sequence.length < n) {
         num++
