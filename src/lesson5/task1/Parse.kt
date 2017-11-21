@@ -92,19 +92,21 @@ fun dateStrToDigit(str: String): String {
  */
 fun dateDigitToStr(digital: String): String {
     var Time = ""
-    val month = mutableListOf("", "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", 
+    val month = mutableListOf("", "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября",
             "октября", "ноября", "декабря")
     val Str = digital.split(".").toMutableList()
+    if (Str.count() != 3) return ""
     try {
-       var m = Str[1].toInt()-1
+        var m = Str[1].toInt() - 1
         if (m !in 0..11) return ""
     } catch (ex: NumberFormatException) {
         return ""
     }
-    if (Str.count() != 3) return ""
     Str[1] = month[Str[1].toInt()]
-    if (Str[0].toInt() in 0..9) Time = Str[0].last() + " " + Str[1] + " " + Str[2]
-    else Time = Str[0] + " " + Str[1] + " " + Str[2]
+    when {
+        Str[0].toInt() in 0..9 -> Time = Str[0].last().toString() + " " + Str[1] + " " + Str[2]
+        else -> Time = Str[0] + " " + Str[1] + " " + Str[2]
+    }
     return Time
 
 }
@@ -121,7 +123,10 @@ fun dateDigitToStr(digital: String): String {
  * Все символы в номере, кроме цифр, пробелов и +-(), считать недопустимыми.
  * При неверном формате вернуть пустую строку
  */
-fun flattenPhoneNumber(phone: String): String = TODO()
+fun flattenPhoneNumber(phone: String): String {
+    if (!phone.matches(Regex("""^\+?[ \d\-\)\(]{1,}$"""))) return ""
+    return phone.replace(Regex("""[ \-\)\(]"""), "")
+}
 
 /**
  * Средняя
@@ -168,7 +173,16 @@ fun plusMinus(expression: String): Int = TODO()
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
 fun firstDuplicateIndex(str: String): Int {
-    TODO()
+    var L = 0
+    var double = ""
+    var Str=str
+    for (i in Str.toLowerCase().split(' ')) {
+        if (i != double) {
+            double = i
+            L += i.length + 1
+        } else return L - i.length - 1
+    }
+    return -1
 }
 
 /**
