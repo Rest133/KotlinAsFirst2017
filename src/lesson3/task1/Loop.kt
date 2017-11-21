@@ -154,8 +154,8 @@ fun maxDivisor(n: Int): Int {
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
 fun isCoPrime(m: Int, n: Int): Boolean {
-    var nd=lcm(m,n)
-    return m*n==nd
+    var nd = lcm(m, n)
+    return m * n == nd
 }
 
 /**
@@ -179,7 +179,7 @@ fun squareBetweenExists(m: Int, n: Int): Boolean {
  * Нужную точность считать достигнутой, если очередной член ряда меньше eps по модулю
  */
 fun sin(x: Double, eps: Double): Double {
-TODO()
+    TODO()
 }
 
 /**
@@ -256,22 +256,23 @@ fun hasDifferentDigits(n: Int): Boolean {
  */
 fun squareSequenceDigit(n: Int): Int {
     var num = 0//цифра
-    var sequence: String = ""//последовательность
-    var number: String // число по порядку
-    var sq: Int
-    var i = 0
-    while (sequence.length < n) {
+    var sequence = 0//последовательность
+    var seq = 0
+    var sq = 0
+    var i = 1
+    while (sequence < n) {
         num++
         sq = num * num
-        sequence += sq
+        seq = digitNumber(sq)
+        sequence += seq
     }
-    number = sequence.last().toString()
-    sequence[i]
-    if (sequence.length == n) return number.toInt() else while (i != n) {
-        i--
+    num = sequence - n
+    while (num != 0) {
+        i *= 10
+        num--
     }
-    number = sequence[i - 1].toString()
-    return number.toInt()
+    sq=sq/i%10
+    return sq
 }
 
 /**
