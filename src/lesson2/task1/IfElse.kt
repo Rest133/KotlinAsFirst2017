@@ -72,11 +72,17 @@ fun timeForHalfWay(t1: Double, v1: Double,
  */
 fun whichRookThreatens(kingX: Int, kingY: Int,
                        rookX1: Int, rookY1: Int,
-                       rookX2: Int, rookY2: Int): Int = when {
-    (kingX == rookX2 || kingY == rookY2) && (kingX == rookX1 || kingY == rookY1) -> 3
-    kingX == rookX2 || kingY == rookY2 -> 2
-    kingX == rookX1 || kingY == rookY1 -> 1
-    else -> 0
+                       rookX2: Int, rookY2: Int): Int {
+    val x = kingX == rookX2
+    val y = kingY == rookY2
+    val x1 = kingX == rookX1
+    val y1 = kingY == rookY1
+    when {
+        (x || y) && (x1 || y1) -> return 3
+        x || y -> return 2
+        x1 || y1 -> return 1
+    }
+    return 0
 }
 
 /**
@@ -91,11 +97,17 @@ fun whichRookThreatens(kingX: Int, kingY: Int,
  */
 fun rookOrBishopThreatens(kingX: Int, kingY: Int,
                           rookX: Int, rookY: Int,
-                          bishopX: Int, bishopY: Int): Int = when {
-    (kingX == rookX || kingY == rookY) && (abs(kingX - bishopX) == abs(kingY - bishopY)) -> 3
-    abs(kingX - bishopX) == abs(kingY - bishopY) -> 2
-    kingX == rookX || kingY == rookY -> 1
-    else -> 0
+                          bishopX: Int, bishopY: Int): Int {
+    val x = kingX == rookX
+    val y = kingY == rookY
+    val x1 = kingX - bishopX
+    val y1 = kingY - bishopY
+    when {
+        (x || y) && (abs(x1) == abs(y1)) -> return 3
+        abs(x1) == abs(y1) -> return 2
+        x || y -> return 1
+    }
+    return 0
 }
 
 /**
@@ -107,9 +119,12 @@ fun rookOrBishopThreatens(kingX: Int, kingY: Int,
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
+    val a2 = a * a
+    val b2 = b * b
+    val c2 = c * c
     if (a + b <= c || b + c <= a || a + c <= b) return -1
-    if (a * a + b * b < c * c || a * a + c * c < b * b || c * c + b * b < a * a) return 2
-    if (a * a + b * b == c * c || a * a + c * c == b * b || c * c + b * b == a * a) return 1 else return 0
+    if (a2 + b2 < c2 || a2 + c2 < b2 || c2 + b2 < a2) return 2
+    if (a2 + b2 == c2 || a2 + c2 == b2 || c2 + b2 == a2) return 1 else return 0
 }
 
 /**
