@@ -114,10 +114,10 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  * Модуль пустого вектора считать равным 0.0.
  */
 fun abs(v: List<Double>): Double {
-    var Abs = 0.0
+    var abs = 0.0
     for (i in 0 until v.size)
-        Abs += sqr(v[i])
-    return sqrt(Abs)
+        abs += sqr(v[i])
+    return sqrt(abs)
 }
 
 /**
@@ -136,9 +136,9 @@ fun mean(list: List<Double>): Double = if (list.size == 0) 0.0 else list.sum() /
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
 fun center(list: MutableList<Double>): MutableList<Double> {
-    var mean1 = mean(list)
+    var mean = mean(list)
     for (i in 0 until list.size) {
-        list[i] -= mean1
+        list[i] -= mean
     }
     return list
 }
@@ -151,10 +151,10 @@ fun center(list: MutableList<Double>): MutableList<Double> {
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.0.
  */
 fun times(a: List<Double>, b: List<Double>): Double {
-    var C = 0.0
+    var c = 0.0
     for (i in 0 until a.size)
-        C += a[i] * b[i]
-    return C
+        c += a[i] * b[i]
+    return c
 
 }
 
@@ -167,11 +167,11 @@ fun times(a: List<Double>, b: List<Double>): Double {
  * Значение пустого многочлена равно 0.0 при любом x.
  */
 fun polynom(p: List<Double>, x: Double): Double {
-    var P = 0.0
+    var h = 0.0
     for (i in 0 until p.size)
-        P += p[i] * pow(x, i.toDouble())
+        h += p[i] * pow(x, i.toDouble())
 
-    return P
+    return h
 }
 
 /**
@@ -201,14 +201,14 @@ fun accumulate(list: MutableList<Double>): MutableList<Double> {
  * Множители в списке должны располагаться по возрастанию.
  */
 fun factorize(n: Int): List<Int> {
-    var N = n
+    var h = n
     val m = mutableListOf<Int>()
-    while (!isPrime(N)) {
-        var d = minDivisor(N)
+    while (!isPrime(h)) {
+        var d = minDivisor(h)
         m += d
-        N /= d
+        h /= d
     }
-    m += N
+    m += h
     m.sorted()
     return m
 }
@@ -280,49 +280,22 @@ fun decimalFromString(str: String, base: Int): Int {
  * Например: 23 = XXIII, 44 = XLIV, 100 = C
  */
 fun roman(n: Int): String {
+    val haundred = listOf("", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM")
+    val tens = listOf("", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC")
+    val numbers = listOf("", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX")
     var number = ""
-    var N = n
-    N /= 1000
-    while (N != 0) {
+    var h = n
+    h /= 1000
+    while (h != 0) {
         number += 'M'
-        N--
+        h--
     }
-    N = n % 1000
-    when {
-        N / 100 == 9 -> number += "CM"
-        N / 100 == 8 -> number += "DCCC"
-        N / 100 == 7 -> number += "DCC"
-        N / 100 == 6 -> number += "DC"
-        N / 100 == 5 -> number += "D"
-        N / 100 == 4 -> number += "CD"
-        N / 100 == 3 -> number += "CCC"
-        N / 100 == 2 -> number += "CC"
-        N / 100 == 1 -> number += "C"
-    }
-    N = n % 100
-    when {
-        N / 10 == 9 -> number += "XC"
-        N / 10 == 8 -> number += "LXXX"
-        N / 10 == 7 -> number += "LXX"
-        N / 10 == 6 -> number += "LX"
-        N / 10 == 5 -> number += "L"
-        N / 10 == 4 -> number += "XL"
-        N / 10 == 3 -> number += "XXX"
-        N / 10 == 2 -> number += "XX"
-        N / 10 == 1 -> number += "X"
-    }
-    N = n % 10
-    when {
-        N == 9 -> number += "IX"
-        N == 8 -> number += "VIII"
-        N == 7 -> number += "VII"
-        N == 6 -> number += "VI"
-        N == 5 -> number += "V"
-        N == 4 -> number += "IV"
-        N == 3 -> number += "III"
-        N == 2 -> number += "II"
-        N == 1 -> number += "I"
-    }
+    h = n % 1000
+    number += haundred[h / 100]
+    h = n % 100
+    number += tens[h / 10]
+    h = n % 10
+    number += numbers[h]
 
     return number
 }
@@ -340,27 +313,28 @@ fun russian(n: Int): String {
             "пятьдесят ", "шестьдесят ", "семьдесят ", "восемьдесят ", "девяносто ")
     val eleven = listOf("десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать",
             "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать")
-    val hundred = listOf(" ", " сто ", " двести ", " триста ", " четыреста ", " пятьсот ", " шестьсот ", " семьсот ", " восемьсот ", " девятьсот ")
+    val hundred = listOf(" ", " сто ", " двести ", " триста ", " четыреста ", " пятьсот ",
+            " шестьсот ", " семьсот ", " восемьсот ", " девятьсот ")
     val thousands = listOf(" ", "одна", "две", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять")
-    val thousand = listOf(" тысяча ", " тысячи ", " тысяч ")
-    var N = ""
+    val words = listOf(" тысяча ", " тысячи ", " тысяч ")
+    var h = ""
     var k = n / 1000
     when {
-        k % 100 in 10 until 20 -> N += hundred[n / 100000] + eleven[k % 10] + thousand[2]
-        else -> if (k % 10 == 1) N += hundred[n / 100000] + tens[k % 100 / 10] + thousands[k % 10] + thousand[0]
-        else if (k % 10 == 2 || k % 10 == 3 || k % 10 == 4) N += hundred[n / 100000] + tens[k % 100 / 10] + thousands[k % 10] + thousand[1]
-        else
-            N += hundred[n / 100000] + tens[k % 100 / 10] + thousands[k % 10] + thousand[2]
+        k % 100 in 10 until 20 -> h += hundred[n / 100000] + eleven[k % 10] + words[2]
+        else -> when {
+            k % 10 == 1 -> h += hundred[n / 100000] + tens[k % 100 / 10] + thousands[k % 10] + words[0]
+            k % 10 == 2 || k % 10 == 3 || k % 10 == 4 -> h += hundred[n / 100000] + tens[k % 100 / 10] + thousands[k % 10] + words[1]
+            else -> h += hundred[n / 100000] + tens[k % 100 / 10] + thousands[k % 10] + words[2]
+        }
     }
-    N = N.trim()
-    when {N == "тысяч" || N == "тысяч" || N == "тысяч" -> N = ""
-    }
+    h = h.trim()
+    when {h == "тысяч" || h == "тысяч" || h == "тысяч" -> h = "" }
     k = n % 1000
     when {
-        k % 100 in 10 until 20 -> N += hundred[n % 1000 / 100] + eleven[k % 10]
-        else -> N += hundred[n % 1000 / 100] + tens[k % 100 / 10] + numbers[k % 10]
+        k % 100 in 10 until 20 -> h += hundred[n % 1000 / 100] + eleven[k % 10]
+        else -> h += hundred[n % 1000 / 100] + tens[k % 100 / 10] + numbers[k % 10]
     }
-    N = N.trim().replace("  ", " ")
-    N = N.replace("  ", " ")
-    return N
+    h = h.trim().replace("  ", " ")
+    h = h.replace("  ", " ")
+    return h
 }
