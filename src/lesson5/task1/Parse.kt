@@ -1,10 +1,11 @@
-@file:Suppress("UNUSED_PARAMETER")
-
 package lesson5.task1
 
 import com.sun.xml.internal.ws.api.model.ExceptionType
 import java.io.File.separator
 import java.sql.Time
+
+val month = mutableListOf("", "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября",
+        "октября", "ноября", "декабря")
 
 /**
  * Пример
@@ -70,8 +71,6 @@ fun main(args: Array<String>) {
  * При неверном формате входной строки вернуть пустую строку
  */
 fun dateStrToDigit(str: String): String {
-    val month = mutableListOf("", "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября",
-            "октября", "ноября", "декабря")
     val Str = str.split(" ").toMutableList()
     for (part in Str) {
         if (Str.count() != 3 || Str[1] !in month) return ""
@@ -92,12 +91,10 @@ fun dateStrToDigit(str: String): String {
  */
 fun dateDigitToStr(digital: String): String {
     var Time = ""
-    val month = mutableListOf("", "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября",
-            "октября", "ноября", "декабря")
     val Str = digital.split(".").toMutableList()
     if (Str.count() != 3) return ""
     try {
-        var m = Str[1].toInt() - 1
+        val m = Str[1].toInt() - 1
         if (m !in 0..11) return ""
     } catch (ex: NumberFormatException) {
         return ""
@@ -175,8 +172,7 @@ fun plusMinus(expression: String): Int = TODO()
 fun firstDuplicateIndex(str: String): Int {
     var L = 0
     var double = ""
-    var Str=str
-    for (i in Str.toLowerCase().split(' ')) {
+    for (i in str.toLowerCase().split(' ')) {
         if (i != double) {
             double = i
             L += i.length + 1
