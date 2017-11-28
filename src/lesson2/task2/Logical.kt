@@ -40,9 +40,10 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = x1 == x2 || y1
  */
 fun circleInside(x1: Double, y1: Double, r1: Double,
                  x2: Double, y2: Double, r2: Double): Boolean {
-    val s: Double = sqrt(sqr(x2 - x1) + sqr(y2 - y1))
+    val s = sqrt(sqr(x2 - x1) + sqr(y2 - y1))
     return (s == r2 - r1) || (s < r2 - r1)
 }
+
 /**
  * Средняя
  *
@@ -53,5 +54,11 @@ fun circleInside(x1: Double, y1: Double, r1: Double,
  * Вернуть true, если кирпич пройдёт
  */
 fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
-    return ((a <= r && b <= s) || (b <= r && a <= s)) || ((c <= r && b <= s) || (b <= r && c <= s)) || ((a <= r && c <= s) || (c <= r && a <= s))
+    val lng = a <= r
+    val wid = b <= r
+    val hgh = c <= r
+    val slng = a <= s
+    val swid = b <= s
+    val shgh = c <= s
+    return ((lng && swid) || (wid && slng)) || ((hgh && swid) || (wid && shgh)) || ((lng && shgh) || (hgh && slng))
 }
