@@ -154,8 +154,7 @@ fun maxDivisor(n: Int): Int {
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
 fun isCoPrime(m: Int, n: Int): Boolean {
-    var nd = lcm(m, n)
-    return m * n == nd
+    return m * n == lcm(m, n)
 }
 
 /**
@@ -179,7 +178,16 @@ fun squareBetweenExists(m: Int, n: Int): Boolean {
  * Нужную точность считать достигнутой, если очередной член ряда меньше eps по модулю
  */
 fun sin(x: Double, eps: Double): Double {
-    TODO()
+    var sin = x
+    var p = 0.0
+    var n = 2
+    var z = 2 * n - 1
+    do {
+        p = -(pow(-1.0, n.toDouble()) * pow(x, z.toDouble())) / factorial(z)
+        sin += p
+        n++
+    } while (abs(p) >= eps)
+    return sin
 }
 
 /**
@@ -224,8 +232,7 @@ fun revert(n: Int): Int {
  * 15751 -- палиндром, 3653 -- нет.
  */
 fun isPalindrome(n: Int): Boolean {
-    var k = revert(n)
-    return k == n
+    return n == revert(n)
 }
 
 /**
@@ -271,7 +278,7 @@ fun squareSequenceDigit(n: Int): Int {
         i *= 10
         num--
     }
-    sq=sq/i%10
+    sq = sq / i % 10
     return sq
 }
 
