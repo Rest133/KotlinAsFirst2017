@@ -328,13 +328,12 @@ fun russian(n: Int): String {
         }
     }
     h = h.trim()
-    when {h == "тысяч" || h == "тысяч" || h == "тысяч" -> h = "" }
+    when {h == "тысяч" || h == "тысяча" || h == "тысячи" -> h = "" }
     k = n % 1000
     when {
         k % 100 in 10 until 20 -> h += hundred[n % 1000 / 100] + eleven[k % 10]
         else -> h += hundred[n % 1000 / 100] + tens[k % 100 / 10] + numbers[k % 10]
     }
-    h = h.trim().replace("  ", " ")
-    h = h.replace("  ", " ")
+    h = h.trim().replace("  ", " ").replace("  ", " ")
     return h
 }
