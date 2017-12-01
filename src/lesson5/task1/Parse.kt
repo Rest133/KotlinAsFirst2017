@@ -222,6 +222,7 @@ fun mostExpensive(description: String): String = TODO()
 fun fromRoman(roman: String): Int {
     var r = roman
     var result = 0
+    if(roman=="") return -1
     if (roman.matches(Regex("""[^IVXLCDM]"""))) return -1
     r = r.replace(Regex("""CM"""), " 900 ").replace(Regex("""CD"""), " 400 ")
             .replace(Regex("""XC"""), " 90 ").replace(Regex("""XL"""), " 40 ")
