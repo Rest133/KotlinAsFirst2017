@@ -165,8 +165,9 @@ fun isCoPrime(m: Int, n: Int): Boolean {
  * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 квадрата не существует.
  */
 fun squareBetweenExists(m: Int, n: Int): Boolean {
-    for (k in m..n)
-        if (sqrt(k.toDouble()) % 1.0 == 0.0) return true
+    for (k in 0..sqrt(n.toDouble()).toInt()) {
+        if (k * k in m..n) return true
+    }
     return false
 }
 
@@ -178,16 +179,7 @@ fun squareBetweenExists(m: Int, n: Int): Boolean {
  * Нужную точность считать достигнутой, если очередной член ряда меньше eps по модулю
  */
 fun sin(x: Double, eps: Double): Double {
-    var sin = x
-    var p = 0.0
-    var n = 2
-    var z = 2 * n - 1
-    do {
-        p = -(pow(-1.0, n.toDouble()) * pow(x, z.toDouble())) / factorial(z)
-        sin += p
-        n++
-    } while (abs(p) >= eps)
-    return sin
+    TODO()
 }
 
 /**
