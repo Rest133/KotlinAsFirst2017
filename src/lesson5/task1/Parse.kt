@@ -135,7 +135,21 @@ fun flattenPhoneNumber(phone: String): String {
  * Прочитать строку и вернуть максимальное присутствующее в ней число (717 в примере).
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
-fun bestLongJump(jumps: String): Int = TODO()
+fun bestLongJump(jumps: String): Int {
+    var table = jumps.split(" ")
+    var jump = 0
+    println("${jumps}")
+    println("${table}")
+    if (!jumps.contains(Regex("""[0-9]"""))) return -1
+    if (!jumps.contains(Regex("""[%\-]"""))) return -1
+    for (element in table) {
+        var element = element.toIntOrNull()
+        if (element != null) {
+            if (element > jump) jump = element
+        }
+    }
+    return jump
+}
 
 /**
  * Сложная
@@ -205,7 +219,25 @@ fun mostExpensive(description: String): String = TODO()
  *
  * Вернуть -1, если roman не является корректным римским числом
  */
-fun fromRoman(roman: String): Int = TODO()
+fun fromRoman(roman: String): Int {
+    var r = roman
+    var result = 0
+    if (roman.matches(Regex("""[^IVXLCDM]"""))) return -1
+    r = r.replace(Regex("""CM"""), " 900 ").replace(Regex("""CD"""), " 400 ")
+            .replace(Regex("""XC"""), " 90 ").replace(Regex("""XL"""), " 40 ")
+            .replace(Regex("""IX"""), " 9 ").replace(Regex("""IV"""), " 4 ")
+            .replace(Regex("""M"""), " 1000 ").replace(Regex("""D"""), " 500 ")
+            .replace(Regex("""C"""), " 100 ").replace(Regex("""L"""), " 50 ")
+            .replace(Regex("""X"""), " 10 ").replace(Regex("""V"""), " 5 ")
+            .replace(Regex("""I"""), " 1 ")
+    r = r.trim()
+    val parts = r.split("  ")
+    for (part in parts) {
+        val number = part.toInt()
+        result += number
+    }
+    return result
+}
 
 /**
  * Очень сложная
