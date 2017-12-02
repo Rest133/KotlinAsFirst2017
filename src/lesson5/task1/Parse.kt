@@ -172,7 +172,33 @@ fun bestHighJump(jumps: String): Int = TODO()
  * Вернуть значение выражения (6 для примера).
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
-fun plusMinus(expression: String): Int = TODO()
+fun plusMinus(expression: String): Int {
+    var num = 0
+    var num2 = 0
+    val reg = Regex("""\d+( [+-] \d+)*""")
+    if (expression matches reg) {
+        var sum = expression.split(" + ")
+        println("${sum}")
+        for (element in sum) {
+            if (element.contains(Regex("-"))) {
+                var minus = element.split(" - ")
+                num2 = minus.first().toInt()
+                for (i in 1 until minus.size) {
+                    num2 -= minus[i].toInt()
+                    println("${num2}")
+                }
+            } else {
+                var element = element.toInt()
+                num += element
+            }
+        }
+        num += num2
+        println("${num}")
+        return num
+    } else {
+        throw IllegalArgumentException()
+    }
+}
 
 /**
  * Сложная
@@ -222,16 +248,16 @@ fun mostExpensive(description: String): String = TODO()
 fun fromRoman(roman: String): Int {
     var r = roman
     var result = 0
-    if(roman=="") return -1
-    if (roman.matches(Regex("""[^IVXLCDM]"""))) return -1
-    r = r.replace(Regex("""CM"""), " 900 ").replace(Regex("""CD"""), " 400 ")
-            .replace(Regex("""XC"""), " 90 ").replace(Regex("""XL"""), " 40 ")
-            .replace(Regex("""IX"""), " 9 ").replace(Regex("""IV"""), " 4 ")
-            .replace(Regex("""M"""), " 1000 ").replace(Regex("""D"""), " 500 ")
-            .replace(Regex("""C"""), " 100 ").replace(Regex("""L"""), " 50 ")
-            .replace(Regex("""X"""), " 10 ").replace(Regex("""V"""), " 5 ")
-            .replace(Regex("""I"""), " 1 ")
-    r = r.trim()
+    if (roman.matches(Regex(""".*I|.*V|.*X|.*L|.*C|.*D|.*M"""))) {
+        r = r.replace(Regex("""CM"""), " 900 ").replace(Regex("""CD"""), " 400 ")
+                .replace(Regex("""XC"""), " 90 ").replace(Regex("""XL"""), " 40 ")
+                .replace(Regex("""IX"""), " 9 ").replace(Regex("""IV"""), " 4 ")
+                .replace(Regex("""M"""), " 1000 ").replace(Regex("""D"""), " 500 ")
+                .replace(Regex("""C"""), " 100 ").replace(Regex("""L"""), " 50 ")
+                .replace(Regex("""X"""), " 10 ").replace(Regex("""V"""), " 5 ")
+                .replace(Regex("""I"""), " 1 ")
+        r = r.trim()
+    } else return -1
     val parts = r.split("  ")
     for (part in parts) {
         val number = part.toInt()
