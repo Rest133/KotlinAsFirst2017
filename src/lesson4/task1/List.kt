@@ -137,7 +137,7 @@ fun mean(list: List<Double>): Double = if (list.size == 0) 0.0 else list.sum() /
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
 fun center(list: MutableList<Double>): MutableList<Double> {
-    var mean = mean(list)
+    val mean = mean(list)
     for (i in 0 until list.size) {
         list[i] -= mean
     }
@@ -205,7 +205,7 @@ fun factorize(n: Int): List<Int> {
     var h = n
     val m = mutableListOf<Int>()
     while (!isPrime(h)) {
-        var d = minDivisor(h)
+        val d = minDivisor(h)
         m += d
         h /= d
     }
@@ -251,10 +251,8 @@ fun convert(n: Int, base: Int): List<Int> {
 fun convertToString(n: Int, base: Int): String {
     val number = mutableListOf<Char>()
     for (num in convert(n, base)) {
-        when (num) {
-            in 10..35 -> number += 'a' - 10 + (num % base)
-            else -> number += '0' + (num % base)
-        }
+        number += if (num in 10..35) 'a' - 10 + (num % base)
+        else '0' + (num % base)
     }
     return number.joinToString(separator = "")
 }
@@ -287,7 +285,7 @@ fun decimal(digits: List<Int>, base: Int): Int {
  * Например: str = "13c", base = 14 -> 250
  */
 fun decimalFromString(str: String, base: Int): Int {
-TODO()
+    TODO()
 }
 
 /**
@@ -354,6 +352,6 @@ fun russian(n: Int): String {
         k % 100 in 10 until 20 -> h += hundred[n % 1000 / 100] + eleven[k % 10]
         else -> h += hundred[n % 1000 / 100] + tens[k % 100 / 10] + numbers[k % 10]
     }
-    h = h.trim().replace(Regex("""\s\s*""")," ")
+    h = h.trim().replace(Regex("""\s\s*"""), " ")
     return h
 }
