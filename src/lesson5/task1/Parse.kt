@@ -165,6 +165,7 @@ fun bestHighJump(jumps: String): Int {
         println("jump=${jump}")
         if (table[i].contains(Regex("\\+"))) {
             if (table[i - 1].toIntOrNull() != null) {
+                if(table[i - 1].toInt()>jump)
                 jump = table[i - 1].toInt()
                 println("jump=${jump}")
             } else return -1
