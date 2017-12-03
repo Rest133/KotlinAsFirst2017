@@ -51,9 +51,9 @@ fun ageDescription(age: Int): String = when {
 fun timeForHalfWay(t1: Double, v1: Double,
                    t2: Double, v2: Double,
                    t3: Double, v3: Double): Double {
-    var half = (v1 * t1 + v2 * t2 + v3 * t3) / 2
-    var s1 = v1 * t1
-    var s2 = v2 * t2
+    val half = (v1 * t1 + v2 * t2 + v3 * t3) / 2
+    val s1 = v1 * t1
+    val s2 = v2 * t2
     return when {
         s1 >= half -> half / v1
         s1 + s2 >= half && s1 < half -> t1 + (half - s1) / v2
