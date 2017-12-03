@@ -71,15 +71,15 @@ fun main(args: Array<String>) {
  * При неверном формате входной строки вернуть пустую строку
  */
 fun dateStrToDigit(str: String): String {
-    val Str = str.split(" ").toMutableList()
-    for (part in Str) {
-        if (Str.count() != 3 || Str[1] !in month) return ""
+    val str = str.split(" ").toMutableList()
+    for (part in str) {
+        if (str.count() != 3 || str[1] !in month) return ""
     }
-    val Time = month.indexOf(Str[1])
-    Str[0] = twoDigitStr(Str[0].toInt())
-    Str[1] = twoDigitStr(Time)
+    val Time = month.indexOf(str[1])
+    str[0] = twoDigitStr(str[0].toInt())
+    str[1] = twoDigitStr(Time)
 
-    return Str.joinToString(separator = ".")
+    return str.joinToString(separator = ".")
 }
 
 /**
