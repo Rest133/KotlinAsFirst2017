@@ -91,18 +91,18 @@ fun dateStrToDigit(str: String): String {
  */
 fun dateDigitToStr(digital: String): String {
     var Time = ""
-    val Str = digital.split(".").toMutableList()
-    if (Str.count() != 3) return ""
+    val str = digital.split(".").toMutableList()
+    if (str.count() != 3) return ""
     try {
-        val m = Str[1].toInt() - 1
+        val m = str[1].toInt() - 1
         if (m !in 0..11) return ""
     } catch (ex: NumberFormatException) {
         return ""
     }
-    Str[1] = month[Str[1].toInt()]
+    str[1] = month[str[1].toInt()]
     when {
-        Str[0].toInt() in 0..9 -> Time = Str[0].last().toString() + " " + Str[1] + " " + Str[2]
-        else -> Time = Str[0] + " " + Str[1] + " " + Str[2]
+        str[0].toInt() in 0..9 -> Time = str[0].last().toString() + " " + str[1] + " " + str[2]
+        else -> Time = str[0] + " " + str[1] + " " + str[2]
     }
     return Time
 
@@ -159,7 +159,16 @@ fun bestLongJump(jumps: String): Int {
  * При нарушении формата входной строки вернуть -1.
  */
 fun bestHighJump(jumps: String): Int {
-    TODO()
+    val list = listOf("-", "%", "")
+    val table = jumps.split(" ").filter { it !in list }
+    var jump = -1
+    for (element in table) {
+        var element = element.toIntOrNull()
+        if (element != null) {
+            if (element > jump) jump = element
+        } else return -1
+    }
+    return jump
 }
 
 /**
@@ -210,13 +219,13 @@ fun plusMinus(expression: String): Int {
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
 fun firstDuplicateIndex(str: String): Int {
-    var L = 0
+    var l = 0
     var double = ""
     for (i in str.toLowerCase().split(' ')) {
         if (i != double) {
             double = i
-            L += i.length + 1
-        } else return L - i.length - 1
+            l += i.length + 1
+        } else return l - i.length - 1
     }
     return -1
 }
@@ -308,4 +317,6 @@ fun fromRoman(roman: String): Int {
  * IllegalArgumentException должен бросаться даже если ошибочная команда не была достигнута в ходе выполнения.
  *
  */
-fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> = TODO()
+fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> {
+    TODO()
+}
