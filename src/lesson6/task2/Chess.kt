@@ -44,6 +44,7 @@ fun square(notation: String): Square {
     val column1 = listOf("", 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')
     val a: Int
     val b: Int
+    if (!notation.matches(Regex("""[0-9]"""))) throw IllegalArgumentException()
     if (notation.length != 2) throw IllegalArgumentException()
     a = column1.indexOf(notation[0])
     b = notation[1].toString().toInt()
@@ -103,9 +104,9 @@ fun rookTrajectory(start: Square, end: Square): List<Square> {
     when {
         number == 0 -> return list
         number == 1 -> list.add(Square(end.column, end.row))
-        number == 2 ->{
-            list.add(Square(start.column,end.row))
-            list.add(Square(end.column,end.row))
+        number == 2 -> {
+            list.add(Square(start.column, end.row))
+            list.add(Square(end.column, end.row))
         }
     }
     return list
