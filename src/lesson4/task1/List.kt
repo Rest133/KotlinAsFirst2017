@@ -9,6 +9,7 @@ import lesson3.task1.isPrime
 import lesson3.task1.minDivisor
 import java.lang.Math.pow
 import java.lang.Math.sqrt
+import java.util.regex.Pattern
 
 /**
  * Пример
@@ -228,7 +229,16 @@ fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*
  * Результат перевода вернуть в виде списка цифр в base-ичной системе от старшей к младшей,
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
  */
-fun convert(n: Int, base: Int): List<Int> = TODO()
+fun convert(n: Int, base: Int): List<Int> {
+    var number = n
+    var resultnum = listOf<Int>()
+    if (number == 0) return listOf(0)
+    while (number > 0) {
+        resultnum += number % base
+        number /= base
+    }
+    return resultnum.reversed()
+}
 
 /**
  * Сложная
@@ -238,7 +248,16 @@ fun convert(n: Int, base: Int): List<Int> = TODO()
  * строчными буквами: 10 -> a, 11 -> b, 12 -> c и так далее.
  * Например: n = 100, base = 4 -> 1210, n = 250, base = 14 -> 13c
  */
-fun convertToString(n: Int, base: Int): String = TODO()
+fun convertToString(n: Int, base: Int): String {
+    val number = mutableListOf<Char>()
+    for (num in convert(n, base)) {
+        when (num) {
+            in 10..35 -> number += 'a' - 10 + (num % base)
+            else -> number += '0' + (num % base)
+        }
+    }
+    return number.joinToString(separator = "")
+}
 
 /**
  * Средняя
@@ -268,7 +287,12 @@ fun decimal(digits: List<Int>, base: Int): Int {
  * Например: str = "13c", base = 14 -> 250
  */
 fun decimalFromString(str: String, base: Int): Int {
-    TODO()
+    var h=str
+    println("${str}")
+    var str1=str.split(Regex("""\W"""))
+    println("${str1}")
+// еще в процессе
+    return -1
 }
 
 /**
@@ -328,12 +352,13 @@ fun russian(n: Int): String {
         }
     }
     h = h.trim()
-    when {h == "тысяч" || h == "тысяча" || h == "тысячи" -> h = "" }
+    when {h == "тысяч" || h == "тысяча" || h == "тысячи" -> h = ""
+    }
     k = n % 1000
     when {
         k % 100 in 10 until 20 -> h += hundred[n % 1000 / 100] + eleven[k % 10]
         else -> h += hundred[n % 1000 / 100] + tens[k % 100 / 10] + numbers[k % 10]
     }
-    h = h.trim().replace("  ", " ").replace("  ", " ")
+    h = h.trim().replace(Regex("""\s\s*""")," ")
     return h
 }
