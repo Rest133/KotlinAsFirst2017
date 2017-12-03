@@ -178,14 +178,15 @@ fun plusMinus(expression: String): Int {
     val reg = Regex("""\d+( [+-] \d+)*""")
     if (expression matches reg) {
         var sum = expression.split(" + ")
-        println("${sum}")
+        println("sum=${sum}")
         for (element in sum) {
             if (element.contains(Regex("-"))) {
                 var minus = element.split(" - ")
+                println("minus=${minus}")
                 num2 = minus.first().toInt()
                 for (i in 1 until minus.size) {
                     num2 -= minus[i].toInt()
-                    println("${num2}")
+                    println("num2=${num2}")
                 }
             } else {
                 var element = element.toInt()
@@ -249,21 +250,28 @@ fun fromRoman(roman: String): Int {
     var r = roman
     var result = 0
     if (roman.matches(Regex(""".*I|.*V|.*X|.*L|.*C|.*D|.*M"""))) {
-        r = r.replace(Regex("""CM"""), " 900 ").replace(Regex("""CD"""), " 400 ")
-                .replace(Regex("""XC"""), " 90 ").replace(Regex("""XL"""), " 40 ")
-                .replace(Regex("""IX"""), " 9 ").replace(Regex("""IV"""), " 4 ")
-                .replace(Regex("""M"""), " 1000 ").replace(Regex("""D"""), " 500 ")
-                .replace(Regex("""C"""), " 100 ").replace(Regex("""L"""), " 50 ")
-                .replace(Regex("""X"""), " 10 ").replace(Regex("""V"""), " 5 ")
-                .replace(Regex("""I"""), " 1 ")
-        r = r.trim()
-    } else return -1
+        println("${roman}")
+            r = r.replace(Regex("""CM"""), " 900 ").replace(Regex("""CD"""), " 400 ")
+                    .replace(Regex("""XC"""), " 90 ").replace(Regex("""XL"""), " 40 ")
+                    .replace(Regex("""IX"""), " 9 ").replace(Regex("""IV"""), " 4 ")
+                    .replace(Regex("""M"""), " 1000 ").replace(Regex("""D"""), " 500 ")
+                    .replace(Regex("""C"""), " 100 ").replace(Regex("""L"""), " 50 ")
+                    .replace(Regex("""X"""), " 10 ").replace(Regex("""V"""), " 5 ")
+                    .replace(Regex("""I"""), " 1 ")
+            r = r.trim()
+        } else return-1
     val parts = r.split("  ")
-    for (part in parts) {
-        val number = part.toInt()
-        result += number
+    try {
+        for (part in parts) {
+            val number = part.toInt()
+            result += number
+        }
+        println("${result}")
+        return result
     }
-    return result
+    catch(e:NumberFormatException){
+        return -1
+    }
 }
 
 /**
