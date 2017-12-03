@@ -44,7 +44,6 @@ fun square(notation: String): Square {
     val column1 = listOf("", 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')
     val a: Int
     val b: Int
-    if (!notation.matches(Regex("""[0-9]"""))) throw IllegalArgumentException()
     if (notation.length != 2) throw IllegalArgumentException()
     a = column1.indexOf(notation[0])
     b = notation[1].toString().toInt()
