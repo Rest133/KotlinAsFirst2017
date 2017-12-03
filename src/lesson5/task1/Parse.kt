@@ -136,17 +136,14 @@ fun flattenPhoneNumber(phone: String): String {
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
 fun bestLongJump(jumps: String): Int {
-    var table = jumps.split(" ")
-    var jump = 0
-    println("${jumps}")
-    println("${table}")
-    if (!jumps.contains(Regex("""[0-9]"""))) return -1
-    if (!jumps.contains(Regex("""[%\-]"""))) return -1
+    val list = listOf("-", "%", "")
+    val table = jumps.split(" ").filter { it !in list }
+    var jump = -1
     for (element in table) {
         var element = element.toIntOrNull()
         if (element != null) {
             if (element > jump) jump = element
-        }
+        } else return -1
     }
     return jump
 }
@@ -161,7 +158,9 @@ fun bestLongJump(jumps: String): Int {
  * Прочитать строку и вернуть максимальную взятую высоту (230 в примере).
  * При нарушении формата входной строки вернуть -1.
  */
-fun bestHighJump(jumps: String): Int = TODO()
+fun bestHighJump(jumps: String): Int {
+    TODO()
+}
 
 /**
  * Сложная
@@ -251,15 +250,15 @@ fun fromRoman(roman: String): Int {
     var result = 0
     if (roman.matches(Regex(""".*I|.*V|.*X|.*L|.*C|.*D|.*M"""))) {
         println("${roman}")
-            r = r.replace(Regex("""CM"""), " 900 ").replace(Regex("""CD"""), " 400 ")
-                    .replace(Regex("""XC"""), " 90 ").replace(Regex("""XL"""), " 40 ")
-                    .replace(Regex("""IX"""), " 9 ").replace(Regex("""IV"""), " 4 ")
-                    .replace(Regex("""M"""), " 1000 ").replace(Regex("""D"""), " 500 ")
-                    .replace(Regex("""C"""), " 100 ").replace(Regex("""L"""), " 50 ")
-                    .replace(Regex("""X"""), " 10 ").replace(Regex("""V"""), " 5 ")
-                    .replace(Regex("""I"""), " 1 ")
-            r = r.trim()
-        } else return-1
+        r = r.replace(Regex("""CM"""), " 900 ").replace(Regex("""CD"""), " 400 ")
+                .replace(Regex("""XC"""), " 90 ").replace(Regex("""XL"""), " 40 ")
+                .replace(Regex("""IX"""), " 9 ").replace(Regex("""IV"""), " 4 ")
+                .replace(Regex("""M"""), " 1000 ").replace(Regex("""D"""), " 500 ")
+                .replace(Regex("""C"""), " 100 ").replace(Regex("""L"""), " 50 ")
+                .replace(Regex("""X"""), " 10 ").replace(Regex("""V"""), " 5 ")
+                .replace(Regex("""I"""), " 1 ")
+        r = r.trim()
+    } else return -1
     val parts = r.split("  ")
     try {
         for (part in parts) {
@@ -268,8 +267,7 @@ fun fromRoman(roman: String): Int {
         }
         println("${result}")
         return result
-    }
-    catch(e:NumberFormatException){
+    } catch (e: NumberFormatException) {
         return -1
     }
 }
