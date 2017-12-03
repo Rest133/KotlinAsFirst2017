@@ -157,14 +157,18 @@ fun bestLongJump(jumps: String): Int {
  * При нарушении формата входной строки вернуть -1.
  */
 fun bestHighJump(jumps: String): Int {
-    val list = listOf("-", "%", "")
-    val table = jumps.split(" ").filter { it !in list }
+    if (jumps.matches(Regex("""\d+( [+\-%] \d+)*"""))) return -1
+    val table = jumps.split(" ")
     var jump = -1
-    for (element in table) {
-        var element = element.toIntOrNull()
-        if (element != null) {
-            if (element > jump) jump = element
-        } else return -1
+    println("${table}")
+    for (i in 0 until table.size) {
+        println("jump=${jump}")
+        if (table[i].contains(Regex("\\+"))) {
+            if (table[i - 1].toIntOrNull() != null) {
+                jump = table[i - 1].toInt()
+                println("jump=${jump}")
+            } else return -1
+        }
     }
     return jump
 }
