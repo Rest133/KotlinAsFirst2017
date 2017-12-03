@@ -111,11 +111,10 @@ fun fib(n: Int): Int {
 fun lcm(m: Int, n: Int): Int {
     var fnum = m
     var snum = n
-    var nd = m * n
     while (fnum != 0 && snum != 0) {
         if (fnum > snum) fnum %= snum else snum %= fnum
     }
-    return nd / (fnum + snum)
+    return m * n / (fnum + snum)
 }
 
 /**
@@ -124,7 +123,7 @@ fun lcm(m: Int, n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    var num = n
+    val num = n
     var q = 2
     while (q <= num && num % q != 0) {
         q++
@@ -138,7 +137,7 @@ fun minDivisor(n: Int): Int {
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
 fun maxDivisor(n: Int): Int {
-    var num = n
+    val num = n
     var q1 = n - 1
     while (num % q1 != 0) {
         q1--
