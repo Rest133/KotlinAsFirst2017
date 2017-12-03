@@ -172,6 +172,23 @@ fun squareBetweenExists(m: Int, n: Int): Boolean {
 }
 
 /**
+ *
+ */
+fun function(x: Double, eps: Double, i: Int): Double {
+    var i = i
+    var p = 2.0
+    var resault = 0.0
+    val n = x % (2 * PI)
+    do {
+        val trigfun = pow(n, i.toDouble()) / factorial(i) * pow(-1.0, p)
+        resault += trigfun
+        i += 2
+        p++
+    } while (abs(trigfun) > eps)
+    return resault
+}
+
+/**
  * Средняя
  *
  * Для заданного x рассчитать с заданной точностью eps
@@ -179,7 +196,7 @@ fun squareBetweenExists(m: Int, n: Int): Boolean {
  * Нужную точность считать достигнутой, если очередной член ряда меньше eps по модулю
  */
 fun sin(x: Double, eps: Double): Double {
-    TODO()
+    return function(x, eps, 1)
 }
 
 /**
@@ -189,7 +206,9 @@ fun sin(x: Double, eps: Double): Double {
  * cos(x) = 1 - x^2 / 2! + x^4 / 4! - x^6 / 6! + ...
  * Нужную точность считать достигнутой, если очередной член ряда меньше eps по модулю
  */
-fun cos(x: Double, eps: Double): Double = TODO()
+fun cos(x: Double, eps: Double): Double {
+    return function(x, eps, 0)
+}
 
 /**
  * Средняя
