@@ -137,9 +137,8 @@ fun mean(list: List<Double>): Double = if (list.size == 0) 0.0 else list.sum() /
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
 fun center(list: MutableList<Double>): MutableList<Double> {
-    val mean = mean(list)
     for (i in 0 until list.size) {
-        list[i] -= mean
+        list[i] -= mean(list)
     }
     return list
 }
@@ -330,27 +329,26 @@ fun russian(n: Int): String {
             "пятьдесят ", "шестьдесят ", "семьдесят ", "восемьдесят ", "девяносто ")
     val eleven = listOf("десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать",
             "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать")
-    val hundred = listOf(" ", " сто ", " двести ", " триста ", " четыреста ", " пятьсот ",
+    val hundreds = listOf(" ", " сто ", " двести ", " триста ", " четыреста ", " пятьсот ",
             " шестьсот ", " семьсот ", " восемьсот ", " девятьсот ")
     val thousands = listOf(" ", "одна", "две", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять")
     val words = listOf(" тысяча ", " тысячи ", " тысяч ")
     var h = ""
     var k = n / 1000
     when {
-        k % 100 in 10 until 20 -> h += hundred[n / 100000] + eleven[k % 10] + words[2]
+        k % 100 in 10 until 20 -> h += hundreds[n / 100000] + eleven[k % 10] + words[2]
         else -> when {
-            k % 10 == 1 -> h += hundred[n / 100000] + tens[k % 100 / 10] + thousands[k % 10] + words[0]
-            k % 10 == 2 || k % 10 == 3 || k % 10 == 4 -> h += hundred[n / 100000] + tens[k % 100 / 10] + thousands[k % 10] + words[1]
-            else -> h += hundred[n / 100000] + tens[k % 100 / 10] + thousands[k % 10] + words[2]
+            k % 10 == 1 -> h += hundreds[n / 100000] + tens[k % 100 / 10] + thousands[k % 10] + words[0]
+            k % 10 == 2 || k % 10 == 3 || k % 10 == 4 -> h += hundreds[n / 100000] + tens[k % 100 / 10] + thousands[k % 10] + words[1]
+            else -> h += hundreds[n / 100000] + tens[k % 100 / 10] + thousands[k % 10] + words[2]
         }
     }
     h = h.trim()
-    when {h == "тысяч" || h == "тысяча" || h == "тысячи" -> h = ""
-    }
+    if (h == "тысяч" || h == "тысяча" || h == "тысячи") h = ""
     k = n % 1000
     when {
-        k % 100 in 10 until 20 -> h += hundred[n % 1000 / 100] + eleven[k % 10]
-        else -> h += hundred[n % 1000 / 100] + tens[k % 100 / 10] + numbers[k % 10]
+        k % 100 in 10 until 20 -> h += hundreds[n % 1000 / 100] + eleven[k % 10]
+        else -> h += hundreds[n % 1000 / 100] + tens[k % 100 / 10] + numbers[k % 10]
     }
     h = h.trim().replace(Regex("""\s\s*"""), " ")
     return h
