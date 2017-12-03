@@ -90,8 +90,7 @@ fun dateStrToDigit(str: String): String {
  * При неверном формате входной строки вернуть пустую строку
  */
 fun dateDigitToStr(digital: String): String {
-    var Time = ""
-    val str = digital.split(".").toMutableList()
+    var str = digital.split(".").toMutableList()
     if (str.count() != 3) return ""
     try {
         val m = str[1].toInt() - 1
@@ -99,13 +98,12 @@ fun dateDigitToStr(digital: String): String {
     } catch (ex: NumberFormatException) {
         return ""
     }
+    str[0] = str[0].toInt().toString()
     str[1] = month[str[1].toInt()]
     when {
-        str[0].toInt() in 0..9 -> Time = str[0].last().toString() + " " + str[1] + " " + str[2]
-        else -> Time = str[0] + " " + str[1] + " " + str[2]
+        str[0].toInt() in 0..9 -> return str.joinToString(separator = " ")
+        else -> return str.joinToString(separator = " ")
     }
-    return Time
-
 }
 
 /**
@@ -159,7 +157,16 @@ fun bestLongJump(jumps: String): Int {
  * При нарушении формата входной строки вернуть -1.
  */
 fun bestHighJump(jumps: String): Int {
-TODO()
+    val list = listOf("-", "%", "")
+    val table = jumps.split(" ").filter { it !in list }
+    var jump = -1
+    for (element in table) {
+        var element = element.toIntOrNull()
+        if (element != null) {
+            if (element > jump) jump = element
+        } else return -1
+    }
+    return jump
 }
 
 /**
