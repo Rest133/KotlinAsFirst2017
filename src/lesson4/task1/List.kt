@@ -287,12 +287,7 @@ fun decimal(digits: List<Int>, base: Int): Int {
  * Например: str = "13c", base = 14 -> 250
  */
 fun decimalFromString(str: String, base: Int): Int {
-    var h=str
-    println("${str}")
-    var str1=str.split(Regex("""\W"""))
-    println("${str1}")
-// еще в процессе
-    return -1
+TODO()
 }
 
 /**
