@@ -75,9 +75,9 @@ fun dateStrToDigit(str: String): String {
     for (part in str) {
         if (str.count() != 3 || str[1] !in month) return ""
     }
-    val Time = month.indexOf(str[1])
+    val time = month.indexOf(str[1])
     str[0] = twoDigitStr(str[0].toInt())
-    str[1] = twoDigitStr(Time)
+    str[1] = twoDigitStr(time)
 
     return str.joinToString(separator = ".")
 }
@@ -165,8 +165,8 @@ fun bestHighJump(jumps: String): Int {
         println("jump=${jump}")
         if (table[i].contains(Regex("\\+"))) {
             if (table[i - 1].toIntOrNull() != null) {
-                if(table[i - 1].toInt()>jump)
-                jump = table[i - 1].toInt()
+                if (table[i - 1].toInt() > jump)
+                    jump = table[i - 1].toInt()
                 println("jump=${jump}")
             } else return -1
         }
