@@ -90,7 +90,7 @@ fun dateStrToDigit(str: String): String {
  * При неверном формате входной строки вернуть пустую строку
  */
 fun dateDigitToStr(digital: String): String {
-    var str = digital.split(".").toMutableList()
+    val str = digital.split(".").toMutableList()
     if (str.count() != 3) return ""
     try {
         val m = str[1].toInt() - 1
@@ -138,9 +138,9 @@ fun bestLongJump(jumps: String): Int {
     val table = jumps.split(" ").filter { it !in list }
     var jump = -1
     for (element in table) {
-        var element = element.toIntOrNull()
-        if (element != null) {
-            if (element > jump) jump = element
+        val maxJump = element.toIntOrNull()
+        if (maxJump != null) {
+            if (maxJump > jump) jump = maxJump
         } else return -1
     }
     return jump
@@ -188,11 +188,11 @@ fun plusMinus(expression: String): Int {
     var num2 = 0
     val reg = Regex("""\d+( [+-] \d+)*""")
     if (expression matches reg) {
-        var sum = expression.split(" + ")
+        val sum = expression.split(" + ")
         println("sum=${sum}")
         for (element in sum) {
             if (element.contains(Regex("-"))) {
-                var minus = element.split(" - ")
+                val minus = element.split(" - ")
                 println("minus=${minus}")
                 num2 = minus.first().toInt()
                 for (i in 1 until minus.size) {
@@ -200,7 +200,7 @@ fun plusMinus(expression: String): Int {
                     println("num2=${num2}")
                 }
             } else {
-                var element = element.toInt()
+                val element = element.toInt()
                 num += element
             }
         }
@@ -223,10 +223,10 @@ fun plusMinus(expression: String): Int {
  */
 fun firstDuplicateIndex(str: String): Int {
     var l = 0
-    var double = ""
+    var d = ""
     for (i in str.toLowerCase().split(' ')) {
-        if (i != double) {
-            double = i
+        if (i != d) {
+            d = i
             l += i.length + 1
         } else return l - i.length - 1
     }
