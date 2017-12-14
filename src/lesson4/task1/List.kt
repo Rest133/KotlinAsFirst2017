@@ -335,7 +335,7 @@ fun russian(n: Int): String {
     val thousands = listOf(" ", "одна", "две", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять")
     val words = listOf(" тысяча ", " тысячи ", " тысяч ")
     var resault = ""
-    var thousandNumber = n / 1000
+    val thousandNumber = n / 1000
     when {
         thousandNumber == 0 -> resault = ""
         thousandNumber % 100 in 10 until 20 -> resault += hundreds[n / 100000] + eleven[thousandNumber % 10] + words[2]
@@ -346,11 +346,12 @@ fun russian(n: Int): String {
         }
     }
     resault = resault.trim()
-    thousandNumber = n % 1000
+    val belowThousand = n % 1000
     when {
-        thousandNumber % 100 in 10 until 20 -> resault += hundreds[n % 1000 / 100] + eleven[thousandNumber % 10]
-        else -> resault += hundreds[n % 1000 / 100] + tens[thousandNumber % 100 / 10] + numbers[thousandNumber % 10]
+        belowThousand % 100 in 10 until 20 -> resault += hundreds[n % 1000 / 100] + eleven[belowThousand % 10]
+        else -> resault += hundreds[n % 1000 / 100] + tens[belowThousand % 100 / 10] + numbers[belowThousand % 10]
     }
     resault = resault.trim().replace(Regex("""\s\s*"""), " ")
     return resault
 }
+
