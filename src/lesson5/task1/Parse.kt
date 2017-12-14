@@ -100,9 +100,9 @@ fun dateDigitToStr(digital: String): String {
     }
     str[0] = str[0].toInt().toString()
     str[1] = month[str[1].toInt()]
-    when {
-        str[0].toInt() in 0..9 -> return str.joinToString(separator = " ")
-        else -> return str.joinToString(separator = " ")
+    return when {
+        str[0].toInt() in 0..9 -> str.joinToString(separator = " ")
+        else -> str.joinToString(separator = " ")
     }
 }
 
@@ -136,14 +136,14 @@ fun flattenPhoneNumber(phone: String): String {
 fun bestLongJump(jumps: String): Int {
     val list = listOf("-", "%", "")
     val table = jumps.split(" ").filter { it !in list }
-    var jump = -1
+    var maxJump = -1
     for (element in table) {
-        val maxJump = element.toIntOrNull()
-        if (maxJump != null) {
-            if (maxJump > jump) jump = maxJump
+        val jump = element.toIntOrNull()
+        if (jump != null) {
+            if (jump > maxJump) maxJump = jump
         } else return -1
     }
-    return jump
+    return maxJump
 }
 
 /**
@@ -223,12 +223,12 @@ fun plusMinus(expression: String): Int {
  */
 fun firstDuplicateIndex(str: String): Int {
     var l = 0
-    var d = ""
-    for (i in str.toLowerCase().split(' ')) {
-        if (i != d) {
-            d = i
-            l += i.length + 1
-        } else return l - i.length - 1
+    var duplicate = ""
+    for (part in str.toLowerCase().split(' ')) {
+        if (part != duplicate) {
+            duplicate = part
+            l += part.length + 1
+        } else return l - part.length - 1
     }
     return -1
 }
@@ -259,7 +259,7 @@ fun mostExpensive(description: String): String = TODO()
  */
 fun fromRoman(roman: String): Int {
     var r = roman
-    var result = 0
+    var result = 0 
     if (roman.matches(Regex(""".*I|.*V|.*X|.*L|.*C|.*D|.*M"""))) {
         println("${roman}")
         r = r.replace(Regex("""CM"""), " 900 ").replace(Regex("""CD"""), " 400 ")
