@@ -258,17 +258,15 @@ fun mostExpensive(description: String): String = TODO()
  * Вернуть -1, если roman не является корректным римским числом
  */
 fun fromRoman(roman: String): Int {
+    val regex = listOf("CM", "CD", "XC", "XL", "IX", "IV", "M", "D", "C", "L", "X", "V", "I")
+    val numbers = listOf("900", "400", "90", "40", "9", "4", "1000", "500", "100", "50", "10", "5", "1")
     var r = roman
-    var result = 0 
+    var result = 0
     if (roman.matches(Regex(""".*I|.*V|.*X|.*L|.*C|.*D|.*M"""))) {
         println("${roman}")
-        r = r.replace(Regex("""CM"""), " 900 ").replace(Regex("""CD"""), " 400 ")
-                .replace(Regex("""XC"""), " 90 ").replace(Regex("""XL"""), " 40 ")
-                .replace(Regex("""IX"""), " 9 ").replace(Regex("""IV"""), " 4 ")
-                .replace(Regex("""M"""), " 1000 ").replace(Regex("""D"""), " 500 ")
-                .replace(Regex("""C"""), " 100 ").replace(Regex("""L"""), " 50 ")
-                .replace(Regex("""X"""), " 10 ").replace(Regex("""V"""), " 5 ")
-                .replace(Regex("""I"""), " 1 ")
+        for (i in 0 until regex.size) {
+            r = r.replace(regex[i], " ${numbers[i]} ")
+        }
         r = r.trim()
     } else return -1
     val parts = r.split("  ")
