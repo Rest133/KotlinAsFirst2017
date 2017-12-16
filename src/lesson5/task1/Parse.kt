@@ -159,20 +159,21 @@ fun bestLongJump(jumps: String): Int {
 fun bestHighJump(jumps: String): Int {
     if (jumps.matches(Regex("""\d+( [+\-%] \d+)*"""))) return -1
     val table = jumps.split(" ")
-    var jump = -1
+    var maxJump = -1
     println("${table}")
     for (i in 0 until table.size) {
-        println("jump=${jump}")
         if (table[i].contains(Regex("\\+"))) {
-            if (table[i - 1].toIntOrNull() != null) {
-                if (table[i - 1].toInt() > jump)
-                    jump = table[i - 1].toInt()
+            val jump = table[i - 1].toIntOrNull()
+            if (jump != null) {
+                if (jump > maxJump)
+                    maxJump = jump
                 println("jump=${jump}")
             } else return -1
         }
     }
-    return jump
+    return maxJump
 }
+
 
 /**
  * Сложная
