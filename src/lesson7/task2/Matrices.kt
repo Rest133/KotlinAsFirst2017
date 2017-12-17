@@ -63,7 +63,39 @@ operator fun Matrix<Int>.plus(other: Matrix<Int>): Matrix<Int> {
  *  9  8  7  6
  */
 fun generateSpiral(height: Int, width: Int): Matrix<Int> {
-    TODO()
+    val cells = height * width
+    val matrix = createMatrix(height, width, cells)
+    println("${matrix}")
+    var n = 1
+    var count1 = 1
+    var count2 = 0
+    while (n <= cells) {
+        for (x in count2 until width - count1 + 1) {
+            matrix[count2, x] = n
+            n++
+            println("X=${matrix[count2, x]}")
+        }
+        for (y in count1 until height - count1 + 1) {
+            matrix[y, width - count1] = n
+            n++
+            println("Y=${matrix[y, width - count1]}")
+        }
+        if (n >= cells) break
+        for (rX in width - count1 - 1 downTo count2) {
+            matrix[height - count1, rX] = n
+            n++
+            println("rX=${matrix[height - count1, rX]}")
+        }
+        for (rY in height - count1 - 1 downTo count1) {
+            matrix[rY, count2] = n
+            n++
+            println("rY=${matrix[rY, count2]}")
+        }
+        count1++
+        count2++
+    }
+    println("matrix=${matrix}")
+    return matrix
 }
 
 /**
