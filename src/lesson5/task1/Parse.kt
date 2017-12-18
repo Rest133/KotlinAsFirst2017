@@ -186,7 +186,7 @@ fun bestHighJump(jumps: String): Int {
  */
 fun plusMinus(expression: String): Int {
     var num = 0
-    var num2 = 0
+    var negative = 0
     val reg = Regex("""\d+( [+-] \d+)*""")
     if (expression matches reg) {
         val sum = expression.split(" + ")
@@ -197,15 +197,15 @@ fun plusMinus(expression: String): Int {
                 num += minus.first().toInt()
                 println("${minus}")
                 for (i in 1 until minus.size) {
-                    num2 -= minus[i].toInt()
-                    println("num2=${num2}")
+                    negative -= minus[i].toInt()
+                    println("num2=${negative}")
                 }
             } else {
                 val element = element.toInt()
                 num += element
             }
         }
-        num += num2
+        num += negative
         println("${num}")
         return num
     } else {
