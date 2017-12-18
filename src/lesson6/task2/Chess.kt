@@ -25,11 +25,11 @@ data class Square(val column: Int, val row: Int) {
      * Для клетки не в пределах доски вернуть пустую строку
      */
     fun notation(): String {
-        val column1 = listOf("", "a", "b", "c", "d", "e", "f", "g", "h")
+        val listOfColumn = listOf("", "a", "b", "c", "d", "e", "f", "g", "h")
         var string = ""
         if (!inside()) return ""
         else {
-            string = column1[column] + row.toString()
+            string = listOfColumn[column] + row.toString()
             return string
         }
     }
@@ -44,11 +44,9 @@ data class Square(val column: Int, val row: Int) {
  */
 fun square(notation: String): Square {
     if (!notation.matches(Regex("""^[a-h][1-8]$"""))) throw IllegalArgumentException()
-    val column1 = listOf("", 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')
-    val a: Int
-    val b: Int
-    a = column1.indexOf(notation[0])
-    b = notation[1].toString().toInt()
+    val listOfColumn = listOf("", 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')
+    val a = listOfColumn.indexOf(notation[0])
+    val b = notation[1].toString().toInt()
     return Square(a, b)
 }
 
@@ -77,10 +75,10 @@ fun square(notation: String): Square {
  */
 fun rookMoveNumber(start: Square, end: Square): Int {
     if (!start.inside() || !end.inside()) throw IllegalArgumentException()
-    when {
-        start == end -> return 0
-        start.column == end.column || start.row == end.row -> return 1
-        else -> return 2
+    return when {
+        start == end -> 0
+        start.column == end.column || start.row == end.row -> 1
+        else -> 2
     }
 }
 
@@ -101,10 +99,10 @@ fun rookMoveNumber(start: Square, end: Square): Int {
 fun rookTrajectory(start: Square, end: Square): List<Square> {
     val number = rookMoveNumber(start, end)
     val list = mutableListOf(start)
-    when {
-        number == 0 -> return list
-        number == 1 -> list.add(Square(end.column, end.row))
-        number == 2 -> {
+    when (number) {
+        0 -> return list
+        1 -> list.add(Square(end.column, end.row))
+        2 -> {
             list.add(Square(start.column, end.row))
             list.add(Square(end.column, end.row))
         }
@@ -178,15 +176,15 @@ fun bishopTrajectory(start: Square, end: Square): List<Square> = TODO()
  * Король может последовательно пройти через клетки (4, 2) и (5, 2) к клетке (6, 3).
  */
 fun kingMoveNumber(start: Square, end: Square): Int {
-    var resault = 0
+    var result = 0
     if (!start.inside() || !end.inside()) throw IllegalArgumentException()
-    when {
-        start == end -> resault = 0
-        abs(start.column - end.column) > abs(start.row - end.row) -> resault = abs(start.column - end.column)
-        abs(start.column - end.column) < abs(start.row - end.row) -> resault = abs(start.row - end.row)
-        else -> resault = abs(start.column - end.column)
+    result = when {
+        start == end -> 0
+        abs(start.column - end.column) > abs(start.row - end.row) -> abs(start.column - end.column)
+        abs(start.column - end.column) < abs(start.row - end.row) -> abs(start.row - end.row)
+        else -> abs(start.column - end.column)
     }
-    return resault
+    return result
 }
 
 /**
