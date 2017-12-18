@@ -334,24 +334,24 @@ fun russian(n: Int): String {
             " шестьсот ", " семьсот ", " восемьсот ", " девятьсот ")
     val thousands = listOf(" ", "одна", "две", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять")
     val words = listOf(" тысяча ", " тысячи ", " тысяч ")
-    var resault = ""
+    var result = ""
     val thousandNumber = n / 1000
     when {
-        thousandNumber == 0 -> resault = ""
-        thousandNumber % 100 in 10 until 20 -> resault += hundreds[n / 100000] + eleven[thousandNumber % 10] + words[2]
+        thousandNumber == 0 -> result = ""
+        thousandNumber % 100 in 10 until 20 -> result += hundreds[n / 100000] + eleven[thousandNumber % 10] + words[2]
         else -> when {
-            thousandNumber % 10 == 1 -> resault += hundreds[n / 100000] + tens[thousandNumber % 100 / 10] + thousands[thousandNumber % 10] + words[0]
-            thousandNumber % 10 == 2 || thousandNumber % 10 == 3 || thousandNumber % 10 == 4 -> resault += hundreds[n / 100000] + tens[thousandNumber % 100 / 10] + thousands[thousandNumber % 10] + words[1]
-            else -> resault += hundreds[n / 100000] + tens[thousandNumber % 100 / 10] + thousands[thousandNumber % 10] + words[2]
+            thousandNumber % 10 == 1 -> result += hundreds[n / 100000] + tens[thousandNumber % 100 / 10] + thousands[thousandNumber % 10] + words[0]
+            thousandNumber % 10 == 2 || thousandNumber % 10 == 3 || thousandNumber % 10 == 4 -> result += hundreds[n / 100000] + tens[thousandNumber % 100 / 10] + thousands[thousandNumber % 10] + words[1]
+            else -> result += hundreds[n / 100000] + tens[thousandNumber % 100 / 10] + thousands[thousandNumber % 10] + words[2]
         }
     }
-    resault = resault.trim()
+    result = result.trim()
     val belowThousand = n % 1000
     when {
-        belowThousand % 100 in 10 until 20 -> resault += hundreds[n % 1000 / 100] + eleven[belowThousand % 10]
-        else -> resault += hundreds[n % 1000 / 100] + tens[belowThousand % 100 / 10] + numbers[belowThousand % 10]
+        belowThousand % 100 in 10 until 20 -> result += hundreds[n % 1000 / 100] + eleven[belowThousand % 10]
+        else -> result += hundreds[n % 1000 / 100] + tens[belowThousand % 100 / 10] + numbers[belowThousand % 10]
     }
-    resault = resault.trim().replace(Regex("""\s\s*"""), " ")
-    return resault
+    result = result.trim().replace(Regex("""\s\s*"""), " ")
+    return result
 }
 
