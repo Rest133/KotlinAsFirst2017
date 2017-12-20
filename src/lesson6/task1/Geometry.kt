@@ -3,6 +3,8 @@
 package lesson6.task1
 
 import lesson1.task1.sqr
+import java.lang.Math.PI
+import java.lang.Math.atan
 
 /**
  * Точка на плоскости
@@ -165,21 +167,31 @@ class Line private constructor(val b: Double, val angle: Double) {
  *
  * Построить прямую по отрезку
  */
-fun lineBySegment(s: Segment): Line = TODO()
+fun lineBySegment(s: Segment): Line {
+    val angle = atan((s.end.y - s.begin.y) / (s.end.x - s.begin.x))
+    return if (s.end.x != s.begin.x) Line(s.end, angle)
+    else Line(s.end, PI / 2)
+}
 
 /**
  * Средняя
  *
  * Построить прямую по двум точкам
  */
-fun lineByPoints(a: Point, b: Point): Line = TODO()
+fun lineByPoints(a: Point, b: Point): Line = lineBySegment(Segment(a, b))
 
 /**
  * Сложная
  *
  * Построить серединный перпендикуляр по отрезку или по двум точкам
  */
-fun bisectorByPoints(a: Point, b: Point): Line = TODO()
+fun bisectorByPoints(a: Point, b: Point): Line {
+    val line = lineByPoints(a, b)
+    var angle = line.angle
+    if (line.angle >= PI / 2) angle -= PI / 2
+    else angle += PI / 2
+    return Line(Point((b.x + a.x) / 2.0, (b.y + a.y) / 2.0), angle)
+}
 
 /**
  * Средняя
@@ -198,7 +210,9 @@ fun findNearestCirclePair(vararg circles: Circle): Pair<Circle, Circle> = TODO()
  * (построить окружность по трём точкам, или
  * построить окружность, описанную вокруг треугольника - эквивалентная задача).
  */
-fun circleByThreePoints(a: Point, b: Point, c: Point): Circle = TODO()
+fun circleByThreePoints(a: Point, b: Point, c: Point): Circle {
+TODO()
+}
 
 /**
  * Очень сложная
@@ -212,3 +226,4 @@ fun circleByThreePoints(a: Point, b: Point, c: Point): Circle = TODO()
  * соединяющий две самые удалённые точки в данном множестве.
  */
 fun minContainingCircle(vararg points: Point): Circle = TODO()
+
