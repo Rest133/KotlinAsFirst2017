@@ -67,32 +67,32 @@ fun generateSpiral(height: Int, width: Int): Matrix<Int> {
     val matrix = createMatrix(height, width, cells)
     println("${matrix}")
     var n = 1
-    var count1 = 1
-    var count2 = 0
+    var count = 1
+    var difCounter = 0
     while (n <= cells) {
-        for (x in count2 until width - count1 + 1) {
-            matrix[count2, x] = n
+        for (x in difCounter until width - count + 1) {
+            matrix[difCounter, x] = n
             n++
-            println("X=${matrix[count2, x]}")
+            println("X=${matrix[difCounter, x]}")
         }
-        for (y in count1 until height - count1 + 1) {
-            matrix[y, width - count1] = n
+        for (y in count until height - count + 1) {
+            matrix[y, width - count] = n
             n++
-            println("Y=${matrix[y, width - count1]}")
+            println("Y=${matrix[y, width - count]}")
         }
         if (n >= cells) break
-        for (rX in width - count1 - 1 downTo count2) {
-            matrix[height - count1, rX] = n
+        for (rX in width - count - 1 downTo difCounter) {
+            matrix[height - count, rX] = n
             n++
-            println("rX=${matrix[height - count1, rX]}")
+            println("rX=${matrix[height - count, rX]}")
         }
-        for (rY in height - count1 - 1 downTo count1) {
-            matrix[rY, count2] = n
+        for (rY in height - count - 1 downTo count) {
+            matrix[rY, difCounter] = n
             n++
-            println("rY=${matrix[rY, count2]}")
+            println("rY=${matrix[rY, difCounter]}")
         }
-        count1++
-        count2++
+        count++
+        difCounter++
     }
     println("matrix=${matrix}")
     return matrix
