@@ -3,8 +3,7 @@
 package lesson6.task1
 
 import lesson1.task1.sqr
-import java.lang.Math.PI
-import java.lang.Math.atan
+import java.lang.Math.*
 
 /**
  * Точка на плоскости
@@ -214,7 +213,7 @@ fun findNearestCirclePair(vararg circles: Circle): Pair<Circle, Circle> = TODO()
  * построить окружность, описанную вокруг треугольника - эквивалентная задача).
  */
 fun circleByThreePoints(a: Point, b: Point, c: Point): Circle {
-TODO()
+    TODO()
 }
 
 /**
